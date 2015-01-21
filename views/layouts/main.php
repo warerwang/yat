@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\widgets\Menu;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -26,7 +27,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => Yii::$app->id,
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -34,25 +35,40 @@ AppAsset::register($this);
             ]);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => [
-                    ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
-                    Yii::$app->user->isGuest ?
-                        ['label' => 'Login', 'url' => ['/site/login']] :
-                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                            'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
-                ],
+                'items' => $this->context->navbarItems,
             ]);
             NavBar::end();
         ?>
 
         <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= $content ?>
+            <?= Breadcrumbs::widget(['links' => $this->context->breadcrumbs]) ?>
+            <?php if ( $this->context->menu ): ?>
+            <div style="width: 90%; margin: 0 auto;">
+                <div class="col-md-2" style="margin-top: 20px">
+                    <nav class="navbar navbar-default">
+                        <?php
+
+                        echo Menu::widget([
+                            'items' => $this->context->menu,
+                            'options' => array('class' => 'nav'),
+                        ]);
+
+                        ?>
+                    </nav><!-- sidebar -->
+                </div>
+
+                <div class="col-md-10 last">
+            <?php endif; ?>
+                    <section>
+                        <div id="content">
+                            <?php //$this->context->showFlashes() ?>
+                            <?php echo $content; ?>
+                        </div><!-- content -->
+                    </section>
+                    <?php if ( $this->context->menu ): ?>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 
