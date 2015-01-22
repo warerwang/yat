@@ -11,6 +11,9 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    public $navbarItems;
+    public $breadcrumbs;
+    public $menu;
     public function behaviors()
     {
         return [

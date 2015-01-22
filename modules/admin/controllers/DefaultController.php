@@ -21,10 +21,28 @@ class DefaultController extends BaseController
                         'roles'   => ['@'],
                     ],
                     [
+                        'actions' => ['signin'],
+                        'allow'   => true,
+                        'roles'   => ['?'],
+                    ],
+                    [
                         'allow' => true,
                         'roles' => ['@'],
                     ]
                 ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
     }
@@ -39,7 +57,7 @@ class DefaultController extends BaseController
     {
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goBack(['admin/default/index']);
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -50,7 +68,7 @@ class DefaultController extends BaseController
     public function actionSignout ()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
+
 }

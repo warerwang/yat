@@ -21,11 +21,11 @@ class BaseController extends Controller
     {
         parent::init();
         $this->navbarItems = [
-            ['label' => 'Home', 'url' => ['/admin/index']],
-            ['label' => 'Users', 'url' => ['/admin/user']],
-            Yii::$app->user->isGuest ? ['label' => 'Login', 'url' => ['/admin/signin']] : [
+            ['label' => 'Home', 'url' => ['/admin/default/index']],
+            ['label' => 'Users', 'url' => ['/admin/user/index']],
+            Yii::$app->user->isGuest ? ['label' => 'Login', 'url' => ['/admin/default/signin']] : [
                 'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                'url'   => ['/admin/signout']
+                'url'   => ['/admin/default/signout']
             ],
         ];
     }

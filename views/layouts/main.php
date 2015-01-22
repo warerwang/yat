@@ -40,35 +40,35 @@ AppAsset::register($this);
             NavBar::end();
         ?>
 
-        <div class="container">
+        <div class="container-fluid" style="margin-top: 50px;">
+            <div class="row">
             <?= Breadcrumbs::widget(['links' => $this->context->breadcrumbs]) ?>
             <?php if ( $this->context->menu ): ?>
-            <div style="width: 90%; margin: 0 auto;">
-                <div class="col-md-2" style="margin-top: 20px">
+            <div class="" style="margin: 0 auto;">
+                <div class="col-md-2">
                     <nav class="navbar navbar-default">
                         <?php
-
                         echo Menu::widget([
                             'items' => $this->context->menu,
-                            'options' => array('class' => 'nav'),
+                            'options' => ['class' => 'nav',],
                         ]);
-
                         ?>
                     </nav><!-- sidebar -->
                 </div>
 
                 <div class="col-md-10 last">
             <?php endif; ?>
-                    <section>
-                        <div id="content">
-                            <?php //$this->context->showFlashes() ?>
-                            <?php echo $content; ?>
-                        </div><!-- content -->
-                    </section>
-                    <?php if ( $this->context->menu ): ?>
+            <section>
+                <div id="content">
+                    <?php //$this->context->showFlashes() ?>
+                    <?php echo $content; ?>
+                </div><!-- content -->
+            </section>
+            <?php if ( $this->context->menu ): ?>
                 </div>
             </div>
             <?php endif; ?>
+            </div>
         </div>
     </div>
 
