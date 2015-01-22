@@ -4,10 +4,10 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use app\modules\admin\components\Controller;
+use app\modules\admin\components\BaseController;
 use app\models\LoginForm;
 
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
     public function behaviors ()
     {

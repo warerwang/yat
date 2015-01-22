@@ -11,7 +11,7 @@ namespace app\modules\admin\components;
 use Yii;
 use yii\web\Controller;
 
-class baseController extends Controller
+class BaseController extends Controller
 {
     public $navbarItems = [];
     public $breadcrumbs = [];
