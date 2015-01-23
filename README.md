@@ -7,8 +7,7 @@ dist 部署时的网站代码
 test js的测试
 tests php的测试
 
-开发需要安装 nodejs npm yo grunt grunt-cli
-产品环境需要 nodejs npm grunt grunt-cli
+产品环境需要 nodejs npm grunt-cli compass karma-cli ruby
 部署
 
 grunt build
