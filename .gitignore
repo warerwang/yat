@@ -1,0 +1,9 @@
+.idea/
+.sass-cache/
+.tmp/
+bower_components/
+dev/styles/.sass-cache/
+dev/styles/main.css
+dist/
+node_modules/
+vendor/
