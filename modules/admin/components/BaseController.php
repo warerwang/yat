@@ -20,6 +20,7 @@ class BaseController extends Controller
     public function init ()
     {
         parent::init();
+        $this->layout = 'main';
         $this->navbarItems = [
             ['label' => 'Home', 'url' => ['/admin/default/index']],
             ['label' => 'Users', 'url' => ['/admin/user/index']],
