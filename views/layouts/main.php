@@ -40,11 +40,14 @@ AppAsset::register($this);
             NavBar::end();
         ?>
 
-        <div class="container-fluid" style="margin-top: 50px;">
+        <div class="container-fluid" style="margin-top: 60px;">
             <div class="row">
-            <?= Breadcrumbs::widget(['links' => $this->context->breadcrumbs]) ?>
+            <div class="col-md-12">
+                <?= Breadcrumbs::widget(['links' => $this->context->breadcrumbs]) ?>
+            </div>
             <?php if ( $this->context->menu ): ?>
-            <div class="" style="margin: 0 auto;">
+            <div class="col-md-12">
+               <div class="row">
                 <div class="col-md-2">
                     <nav class="navbar navbar-default">
                         <?php
@@ -66,6 +69,7 @@ AppAsset::register($this);
             </section>
             <?php if ( $this->context->menu ): ?>
                 </div>
+            </div>
             </div>
             <?php endif; ?>
             </div>
