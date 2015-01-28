@@ -5,7 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use app\modules\admin\components\BaseController;
-use app\models\LoginForm;
+use app\models\forms\LoginForm;
 
 class DefaultController extends BaseController
 {

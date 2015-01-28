@@ -23,11 +23,38 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 EOF
 );
+        $this->execute(<<<EOF
+CREATE TABLE IF NOT EXISTS `article` (
+  `id` char(20) NOT NULL,
+  `cid` char(20) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `create_time` timestamp NULL DEFAULT NULL,
+  `last_modify` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cid` (`cid`),
+  KEY `title` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+EOF
+);
+        $this->execute(<<<EOF
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` char(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `create_time` timestamp NULL DEFAULT NULL,
+  `last_modify` timestamp NULL DEFAULT NULL,
+  `sort` int(11) DEFAULT '100',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+EOF
+);
     }
 
     public function down()
     {
         $this->dropTable('users');
+        $this->dropTable('article');
+        $this->dropTable('category');
         return true;
     }
 }

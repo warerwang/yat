@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\base;
 
 use Yii;
 
@@ -17,7 +17,7 @@ use Yii;
  * @property string $create_time
  * @property string $last_activity
  */
-class UsersBase extends \yii\db\ActiveRecord
+class UsersBase extends Model
 {
     /**
      * @inheritdoc

@@ -35,7 +35,6 @@ class UserController extends BaseController
 
     public function actionIndex ()
     {
-        $this->breadcrumbs[] = '用户列表';
         return $this->render('index');
     }
 }

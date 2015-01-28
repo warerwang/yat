@@ -42,9 +42,11 @@ AppAsset::register($this);
 
         <div class="container-fluid" style="margin-top: 60px;">
             <div class="row">
+            <?php if(isset($this->params['breadcrumbs'])): ?>
             <div class="col-md-12">
-                <?= Breadcrumbs::widget(['links' => $this->context->breadcrumbs]) ?>
+                <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
             </div>
+            <?php endif;?>
             <?php if ( $this->context->menu ): ?>
             <div class="col-md-12">
                <div class="row">

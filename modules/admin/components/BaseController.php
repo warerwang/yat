@@ -8,8 +8,10 @@
 
 namespace app\modules\admin\components;
 
+use app\models\User;
 use Yii;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 
 class BaseController extends Controller
 {
@@ -21,13 +23,18 @@ class BaseController extends Controller
     {
         parent::init();
         $this->layout = 'main';
+        $webUser = Yii::$app->user;
+        if($webUser->isGuest){
+            $this->navbarItems[] = ['label' => 'Login', 'url' => ['default/signin']];
+        }elseif($webUser->identity->group_id != User::GROUP_ADMIN){
+            throw new ForbiddenHttpException("Forbidden");
+        }
         $this->navbarItems = [
-            ['label' => 'Home', 'url' => ['/admin/default/index']],
-            ['label' => 'Users', 'url' => ['/admin/user/index']],
-            Yii::$app->user->isGuest ? ['label' => 'Login', 'url' => ['/admin/default/signin']] : [
-                'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                'url'   => ['/admin/default/signout']
-            ],
+            ['label' => '首页', 'url' => ['default/index']],
+            ['label' => '用户', 'url' => ['user/index']],
+            ['label' => '分类', 'url' => ['category/index']],
+            ['label' => '文章', 'url' => ['article/index']],
+            ['label' => '退出 (' . $webUser->identity->name . ')','url'   => ['default/signout']],
         ];
     }
 }
