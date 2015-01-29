@@ -42,7 +42,13 @@ $config = [
             'showScriptName' => false,
             'enablePrettyUrl' => true,
             'rules' => [
-//                'admin/<controller:\w+>/<action:\w+>/<id:\d+>'=>'admin/<controller>/<action>',
+                [
+                    'class' => \yii\rest\UrlRule::className(),
+                    'controller'    => ['category' => 'category', 'article' => 'article'],
+                    'extraPatterns' => [
+                        'GET {id}/list' => 'list'
+                    ]
+                ],
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),

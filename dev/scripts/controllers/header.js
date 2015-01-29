@@ -8,7 +8,7 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('HeaderCtrl', function ($scope) {
+  .controller('HeaderCtrl', function ($scope, $http) {
         $scope.isSign = true;
         $scope.showSignModal = function(){
             $('#signModal').modal('show');
@@ -19,4 +19,8 @@ angular.module('webappApp')
         $scope.signOut = function(){
             $scope.isSign = false;
         };
+        $http.get('/category').success(function(response){
+            $scope.categorys = response.data;
+        });
+
   });

@@ -24,8 +24,7 @@
       <div class="header" ng-controller="HeaderCtrl">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a ng-href="#/">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
+          <li ng-repeat="category in categorys"><a ng-href="#/category/{{category.id}}">{{category.name}}</a></li>
           <li><a ng-href="#" ng-hide="isSign" ng-click="showSignModal()">Sign In</a></li>
           <li><a ng-href="#" ng-hide="isSign" ng-click="showSignUpModal()">Sign Up</a></li>
           <li><a ng-href="#" ng-show="isSign" ng-click="signOut()">Sign Out</a></li>
@@ -83,7 +82,18 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -96,9 +106,11 @@
         <!-- build:js({.tmp,dev}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/header.js"></script>
         <script src="scripts/controllers/signinmodal.js"></script>
+        <script src="scripts/services/category.js"></script>
+        <script src="scripts/controllers/article.js"></script>
+        <script src="scripts/controllers/category.js"></script>
         <!-- endbuild -->
 </body>
 </html>

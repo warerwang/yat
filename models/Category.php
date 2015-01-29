@@ -35,6 +35,6 @@ class Category extends CategoryBase
 
     public function getArticles()
     {
-        return $this->hasMany(Article::className(), ['id' => 'cid']);
+        return $this->hasMany(Article::className(), ['cid' => 'id']);
     }
 }
