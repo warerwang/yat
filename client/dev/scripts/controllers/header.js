@@ -19,7 +19,7 @@ angular.module('webappApp')
         $scope.signOut = function(){
             $scope.isSign = false;
         };
-        $http.get('/category').success(function(response){
+        $http.get('/rest/category').success(function(response){
             $scope.categorys = response.data;
         });
 

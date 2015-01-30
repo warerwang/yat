@@ -20,7 +20,7 @@ module.exports = function (grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
-
+  grunt.loadNpmTasks('grunt-connect-proxy');
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -68,24 +68,70 @@ module.exports = function (grunt) {
       options: {
         port: 9999,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '127.0.0.1',
         livereload: 35729
       },
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
-            return [
+          middleware: function (connect, options) {
+              if (!Array.isArray(options.base)) {
+                  options.base = [options.base];
+              }
+
+              // 设置代理
+              var middlewares = [require('grunt-connect-proxy/lib/utils').proxyRequest];
+
+              // 代理每个base目录中的静态文件
+              options.base.forEach(function(base) {
+                  middlewares.push(connect.static(base));
+              });
+
+              // 让目录可被浏览（即：允许枚举文件）
+//              var directory = options.directory || options.base[options.base.length - 1];
+//              middlewares.push(connect.directory(directory));
+//              return middlewares;
+            return middlewares.concat([
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
               ),
               connect.static(appConfig.app)
-            ];
-          }
+            ]);
+          },
+//          middleware: function (connect, options) {
+//                if (!Array.isArray(options.base)) {
+//                    options.base = [options.base];
+//                }
+//
+//                // 设置代理
+//                var middlewares = [require('grunt-connect-proxy/lib/utils').proxyRequest];
+//
+//                // 代理每个base目录中的静态文件
+//                options.base.forEach(function(base) {
+//                    middlewares.push(connect.static(base));
+//                });
+//
+//                // 让目录可被浏览（即：允许枚举文件）
+//                var directory = options.directory || options.base[options.base.length - 1];
+//                middlewares.push(connect.directory(directory));
+//
+//                return middlewares;
+//            }
         }
       },
+      proxies: [
+        {
+            context: '/rest', // 这是你希望出现在grunt serve服务中的路径，比如这里配置的是http://127.0.0.1:9000/api/
+            host: 'api.yat.com', // 这是你希望转发到的远端服务器
+            port: 80, // 远端服务器端口
+            changeOrigin: true, // 建议配置为true，这样它转发时就会把host带过去，比如www.ngnice.com，如果远端服务器使用了虚拟主机的方式配置，该选项通常是必须的。
+            rewrite: {
+                '^/rest': ''  // 地址映射策略，从context开始算，把前后地址做正则替换，如果远端路径和context相同则不用配置。
+            }
+        }
+      ],
       test: {
         options: {
           port: 9001,
@@ -398,6 +444,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer',
+      'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);

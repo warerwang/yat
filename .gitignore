@@ -2,12 +2,12 @@
 .sass-cache/
 .tmp/
 bower_components/
-dev/assets/
-dev/styles/.sass-cache/
-dev/styles/main.css
-dist/
 node_modules/
 vendor/
+client/dev/styles/.sass-cache/
+client/dev/styles/main.css
+client/dist/
+dev/assets/
 runtime/
 db.php
 .gitignore

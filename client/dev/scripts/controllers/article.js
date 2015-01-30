@@ -10,7 +10,7 @@
 angular.module('webappApp')
   .controller('ArticleCtrl', function ($scope, $http, $routeParams) {
         var id = $routeParams.id;
-        $http.get('/article/' + id)
+        $http.get('/rest/article/' + id)
             .success(function(response){
                 $scope.article = response.data;
             })

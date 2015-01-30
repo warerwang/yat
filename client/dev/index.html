@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <base href="/">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -23,13 +24,13 @@
     <div class="container">
       <div class="header" ng-controller="HeaderCtrl">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#/">Home</a></li>
-          <li ng-repeat="category in categorys"><a ng-href="#/category/{{category.id}}">{{category.name}}</a></li>
+          <li class="active"><a ng-href="">Home</a></li>
+          <li ng-repeat="category in categorys"><a ng-href="category/{{category.id}}">{{category.name}}</a></li>
           <li><a ng-href="#" ng-hide="isSign" ng-click="showSignModal()">Sign In</a></li>
           <li><a ng-href="#" ng-hide="isSign" ng-click="showSignUpModal()">Sign Up</a></li>
           <li><a ng-href="#" ng-show="isSign" ng-click="signOut()">Sign Out</a></li>
         </ul>
-        <h3 class="text-muted">yat</h3>
+        <h3 class="text-muted">My Blogs</h3>
       </div>
 
       <div ng-view=""></div>
