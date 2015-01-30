@@ -28,13 +28,15 @@ class BaseController extends Controller
             $this->navbarItems[] = ['label' => 'Login', 'url' => ['default/signin']];
         }elseif($webUser->identity->group_id != User::GROUP_ADMIN){
             throw new ForbiddenHttpException("Forbidden");
+        }else{
+            $this->navbarItems = [
+                ['label' => '首页', 'url' => ['default/index']],
+                ['label' => '用户', 'url' => ['user/index']],
+                ['label' => '分类', 'url' => ['category/index']],
+                ['label' => '文章', 'url' => ['article/index']],
+                ['label' => '退出 (' . $webUser->identity->name . ')','url'   => ['default/signout']],
+            ];
         }
-        $this->navbarItems = [
-            ['label' => '首页', 'url' => ['default/index']],
-            ['label' => '用户', 'url' => ['user/index']],
-            ['label' => '分类', 'url' => ['category/index']],
-            ['label' => '文章', 'url' => ['article/index']],
-            ['label' => '退出 (' . $webUser->identity->name . ')','url'   => ['default/signout']],
-        ];
+
     }
 }
