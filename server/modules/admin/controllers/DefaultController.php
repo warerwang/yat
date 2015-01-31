@@ -49,7 +49,6 @@ class DefaultController extends BaseController
 
     public function actionIndex ()
     {
-//        User::className()
         return $this->render('index');
     }
 
@@ -57,7 +56,8 @@ class DefaultController extends BaseController
     {
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack(['admin/default/index']);
+            return $this->goHome();
+            //return $this->goBack(Yii::$app->getHomeUrl());
         } else {
             return $this->render('login', [
                 'model' => $model,

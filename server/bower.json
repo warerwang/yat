@@ -1,0 +1,22 @@
+{
+  "name": "yat",
+  "version": "0.0.0",
+  "homepage": "https://github.com/warerwang/yat",
+  "authors": [
+    "warerwang <warerwang@126.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "vendor/bower"
+  ],
+  "dependencies": {
+    "summernote": "~0.6.0",
+    "es5-shim": "^4.0.0",
+    "json3": "^3.3.0"
+  }
+}

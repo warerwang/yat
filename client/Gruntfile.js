@@ -100,25 +100,6 @@ module.exports = function (grunt) {
               connect.static(appConfig.app)
             ]);
           },
-//          middleware: function (connect, options) {
-//                if (!Array.isArray(options.base)) {
-//                    options.base = [options.base];
-//                }
-//
-//                // 设置代理
-//                var middlewares = [require('grunt-connect-proxy/lib/utils').proxyRequest];
-//
-//                // 代理每个base目录中的静态文件
-//                options.base.forEach(function(base) {
-//                    middlewares.push(connect.static(base));
-//                });
-//
-//                // 让目录可被浏览（即：允许枚举文件）
-//                var directory = options.directory || options.base[options.base.length - 1];
-//                middlewares.push(connect.directory(directory));
-//
-//                return middlewares;
-//            }
         }
       },
       proxies: [
