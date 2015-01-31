@@ -13,17 +13,18 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAsset extends AssetBundle
+class SummernoteAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath = '@bower/summernote';
     public $css = [
-//        'css/site.css',
+        'dist/summernote.css',
     ];
     public $js = [
-        //'@bower/summernote/dist/summernote.js',
+        'dist/summernote.js',
+        'lang/summernote-zh-CN.js'
     ];
     public $depends = [
+        'app\assets\FontAwesomeAsset',
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
