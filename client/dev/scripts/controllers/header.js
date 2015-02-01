@@ -8,7 +8,10 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('HeaderCtrl', function ($scope, $http) {
+  .controller('HeaderCtrl', function ($scope, $http, $location) {
+        $scope.isActive = function(url){
+            return url == $location.$$url;
+        };
         $scope.isSign = true;
         $scope.showSignModal = function(){
             $('#signModal').modal('show');

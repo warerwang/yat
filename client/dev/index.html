@@ -21,18 +21,20 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
+    <div class="container-fuild">
       <div class="header" ng-controller="HeaderCtrl">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="">Home</a></li>
-          <li ng-repeat="category in categorys"><a ng-href="category/{{category.id}}">{{category.name}}</a></li>
+          <li ng-class="{'active':isActive('/')}"><a ng-href="/">Home</a></li>
+          <li ng-class="{'active':isActive('/category/{{category.id}}')}" ng-repeat="category in categorys"><a ng-href="/category/{{category.id}}">{{category.name}}</a></li>
           <li><a ng-href="#" ng-hide="isSign" ng-click="showSignModal()">Sign In</a></li>
           <li><a ng-href="#" ng-hide="isSign" ng-click="showSignUpModal()">Sign Up</a></li>
           <li><a ng-href="#" ng-show="isSign" ng-click="signOut()">Sign Out</a></li>
         </ul>
         <h3 class="text-muted">My Blogs</h3>
       </div>
-
+        <ol class="breadcrumb">
+            <li ng-repeat="breadcrumb in breadcrumbs"><a ng-href="{{breadcrumb.href}}">{{breadcrumb.name}}</a></li>
+        </ol>
       <div ng-view=""></div>
 
       <div class="footer">

@@ -8,7 +8,10 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope,$rootScope) {
+    $rootScope.breadcrumbs = [
+        {href:'/', name:'首页'}
+    ];
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
