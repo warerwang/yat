@@ -13,6 +13,14 @@ use yii\data\ActiveDataProvider;
 
 class Article extends ArticleBase
 {
+    public function rules ()
+    {
+        $rules =  parent::rules();
+        return array_merge($rules,[
+            ['cid', 'exist', 'targetClass' => '\app\models\Category', 'targetAttribute' => 'id'],
+        ]);
+    }
+
     public function beforeValidate ()
     {
         if (parent::beforeValidate()) {

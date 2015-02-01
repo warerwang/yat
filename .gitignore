@@ -11,3 +11,4 @@ dev/assets/
 runtime/
 db.php
 .gitignore
+server/tests/_output
