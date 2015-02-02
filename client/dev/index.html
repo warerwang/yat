@@ -14,6 +14,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <!--<link href="http://typo.sofi.sh/typo.css" rel="stylesheet">-->
   </head>
   <body ng-app="webappApp">
     <!--[if lt IE 7]>
@@ -21,59 +22,64 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container-fuild">
-      <div class="header" ng-controller="HeaderCtrl">
-        <ul class="nav nav-pills pull-right">
-          <li ng-class="{'active':isActive('/')}"><a ng-href="/">Home</a></li>
-          <li ng-class="{'active':isActive('/category/{{category.id}}')}" ng-repeat="category in categorys"><a ng-href="/category/{{category.id}}">{{category.name}}</a></li>
-          <li><a ng-href="#" ng-hide="isSign" ng-click="showSignModal()">Sign In</a></li>
-          <li><a ng-href="#" ng-hide="isSign" ng-click="showSignUpModal()">Sign Up</a></li>
-          <li><a ng-href="#" ng-show="isSign" ng-click="signOut()">Sign Out</a></li>
-        </ul>
-        <h3 class="text-muted">My Blogs</h3>
-      </div>
-        <ol class="breadcrumb">
-            <li ng-repeat="breadcrumb in breadcrumbs"><a ng-href="{{breadcrumb.href}}">{{breadcrumb.name}}</a></li>
-        </ol>
-      <div ng-view=""></div>
-
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
-
-    <div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="SigninmodalCtrl">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">用户登陆</h4>
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+    <div class="header" ng-controller="HeaderCtrl">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Brand</a>
                 </div>
-                <div class="modal-body">
-                    <form role="form">
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a ng-href="#" ng-hide="isSign" ng-click="showSignModal()">登陆</a></li>
+                        <li><a ng-href="#" ng-hide="isSign" ng-click="showSignUpModal()">注册</a></li>
+                        <li><a ng-href="#" ng-show="isSign" ng-click="signOut()">退出</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">用户名</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="输入电子邮箱" ng-model="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">密码</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="密码" ng-model="password">
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="remember_me"> 记住我
-                            </label>
+                            <input type="text" class="form-control" placeholder="输入关键字">
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" ng-click="submit()">确认</button>
-                </div>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-9 col-xs-12">
+            <ol class="breadcrumb" ng-if="breadcrumbs">
+                <li ng-repeat="breadcrumb in breadcrumbs"><a ng-href="{{breadcrumb.href}}">{{breadcrumb.name}}</a></li>
+            </ol>
+            <div ng-view></div>
+        </div>
+        <div class="col-sm-3 hidden-xs right-bar" ng-controller="RightsideCtrl">
+            <div class="panel panel-info">
+                <!-- Default panel contents -->
+                <div class="panel-heading">分类</div>
+                <!-- List group -->
+                <ul class="list-group">
+                    <a class="list-group-item" ng-class="{'active':isActive('/category/{{category.id}}')}" ng-repeat="category in categorys" ng-href="/category/{{category.id}}">{{category.name}}</a>
+                </ul>
             </div>
         </div>
     </div>
-
+    <div class="footer">
+        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+      </div>
+    </div>
+    <div ng-include src="'views/signModal.html'"></div>
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -114,6 +120,7 @@
         <script src="scripts/services/category.js"></script>
         <script src="scripts/controllers/article.js"></script>
         <script src="scripts/controllers/category.js"></script>
+        <script src="scripts/controllers/rightside.js"></script>
         <!-- endbuild -->
 </body>
 </html>

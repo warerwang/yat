@@ -9,9 +9,6 @@
  */
 angular.module('webappApp')
   .controller('HeaderCtrl', function ($scope, $http, $location) {
-        $scope.isActive = function(url){
-            return url == $location.$$url;
-        };
         $scope.isSign = true;
         $scope.showSignModal = function(){
             $('#signModal').modal('show');
@@ -22,8 +19,4 @@ angular.module('webappApp')
         $scope.signOut = function(){
             $scope.isSign = false;
         };
-        $http.get('/rest/category').success(function(response){
-            $scope.categorys = response.data;
-        });
-
   });

@@ -3,8 +3,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-
-
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -14,81 +12,110 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 /* Space out content a bit */
 body {
+  min-width: 480px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+body, input, textarea {
+  font-size: 100%;
+  font-family: "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", "微软雅黑", tahoma, arial, simsun, "宋体";
 }
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
-}
-
 /* Custom page footer */
 .footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
-
-.container-narrow > hr {
-  margin: 30px 0;
+a:hover {
+  text-decoration:none;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+.contact a,.logo-wrap,.menu a,.article-title a,.readmore,.buttonDemo a,.wp-pagenavi a,.backTop,.menu ul li:hover{ -webkit-transition:all 0.3s ease-out; -moz-transition:all 0.3s ease-out; -ms-transition:all 0.3s ease-out; -o-transition:all 0.3s ease-out; transition:all 0.3s ease-out;}
 
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
-}
+.clearfix:after{ content:"\200B"; display:block; height:0; clear:both;}
+.clearfix{ *zoom:1;}
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
+::-moz-selection{ color:#fff; background:#80b600;}
+::selection{ color:#fff; background:#80b600;}
 
-  p + h4 {
-    margin-top: 28px;
-  }
-}
+a:link,a:visited,a:hover{ text-decoration:none; outline:none;}
+.shadow{ -moz-box-shadow:0 0 3px #E9E9E9; -webkit-box-shadow:0 0 3px #E9E9E9; box-shadow:0 0 3px #E9E9E9;}
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
+.article{ padding:20px 30px; background-color:#fff;}
+.article-list{ position:relative; padding:20px 30px 60px 30px; margin-bottom:30px; background-color:#fff;}
+.article-title{ font-size:24px; color:#80b600;}
+.article-title a:link,.article-title a:visited{ color:#80b600;}
+.article-title a:hover{ color:#ff9900;}
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
+.article-info{ margin-top:10px; line-height:1.5; font-size:12px; color:#999;}
+.article-info span.line{ padding:0 8px; color:#ddd; font-family:"SimSun";}
+.article-info a:link,.article-info a:visited{ color:#80b600;}
+.article-info a:hover{ color:#ff9900;}
+.article-body{ margin-top:15px; padding:30px 0; border-top:1px #e9e9e9 solid; font-size:16px; line-height:2; color:#333; overflow:hidden;}
+.article-body a:link,.article-body a:visited{ color:#80b600;}
+.article-body a:hover{ color:#ff9900;}
+.article-body a img{ border:5px #ddd solid;}
+.article-body a img:hover{ border:5px #ccc solid;}
+.article-body h2{ margin-bottom:20px; padding-bottom:5px; border-bottom:1px #e9e9e9 solid; font-size:20px;}
+.article-body h3{ margin-bottom:5px; font-size:18px;}
+.article-body p{ margin-bottom:15px;}
+.article-body ul{ margin-bottom:15px; padding:0 20px;}
+.article-body ul li{ padding-left:15px; background-position:-128px -40px;}
+.article-body ol{ margin-bottom:15px; padding:0 20px 0 40px;}
+.article-body ol li{ list-style-type:decimal;}
+.article-body img{ max-width:90%;}
+.article-body img.aligncenter{ display:block; margin:0 auto;}
+
+.article-body .syntaxhighlighter{ width:auto !important; padding:8px 10px; background-color:#ffffe3 !important; border:2px #cecece dashed; font-family:Arial;}
+.article-body .syntaxhighlighter table td.code .line{ padding:3px 0 !important;}
+.article-body .syntaxhighlighter table{ padding:10px;}
+.article-body .syntaxhighlighter .line.alt1{ background:none !important;}
+.article-body .syntaxhighlighter .line.alt2{ background:none !important;}
+
+.article-body .buttonDemo{ padding:15px 0 30px 0; text-align:center;}
+.article-body .buttonDemo a{ display:inline-block; width:120px; height:40px; background-color:#80b600; line-height:40px; font-size:14px; text-align:center; text-shadow:1px 1px 2px #6b9800; _margin-right:10px;}
+.article-body .buttonDemo a:first-child{ margin-right:10px;}
+.article-body .buttonDemo a:link,.article-body .buttonDemo a:visited{ color:#fff; border:none;}
+.article-body .buttonDemo a:hover{ background-color:#75a700; color:#fff; border:none;}
+
+.article-body .article-copyright{ margin-top:30px; padding:15px; font-size:14px; border:1px #cecece dotted; background:#ffffe3;}
+.article-body .bdlikebutton{ margin:0 auto;}
+
+.article-body table{ width:100%; margin-bottom:15px; border-collapse:collapse;}
+.article-body table td,.article-body table th{ padding:0 10px; border:1px #E9E9E9 solid; border-collapse:collapse;}
+.article-body table th,.article-body table tr:hover{ background:#f8f8f8;}
+.article-body table tr:hover td{ color:#80b600;}
+
+.article-body blockquote:before, .article-body blockquote:after{ content:""; font-size:100px; color:#80b600; font-family:Helvetica,arial,'宋体'; position:absolute;}
+.article-body blockquote:before{ content:"“"; top:45px; left:20px;}
+.article-body blockquote:after{ content:"”"; bottom:-10px; right:20px;}
+.article-body blockquote{ quotes:"" ""; padding:20px 70px; background-color:#f8f8f8; position: relative; line-height:200%; margin-bottom:15px;}
+.article-body blockquote p{ margin:0;}
+
+.readmore{ display:block; position:absolute; left:0; bottom:30px; width:120px; height:40px; background-color:#80b600; line-height:40px; font-size:14px; text-align:center; text-shadow:1px 1px 2px #6b9800;}
+.readmore:link,.readmore:visited{ color:#fff;}
+.readmore:hover{ background-color:#75a700; color:#fff;}
+
+.right-bar {
+  .panel-heading{
+
   }
-  /* Space out the masthead */
-  .header {
-//    margin-bottom: 30px;
+  a{
+    font-size: 18px;
+    padding: 0 5px;
+    line-height: 40px;
+//    font-size: 18px;
+    border-bottom: 1px #f8f8f8 solid;
   }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
+  .list-group-item{
+    &:hover,&:focus,&.active{
+      border-color:#f5f5f5;
+      border-left:5px #80b600 solid;
+      background: #f5f5f5;
+      color:#80b600;
+    }
+    &.active{
+      background: #ffffff;
+    }
   }
 }

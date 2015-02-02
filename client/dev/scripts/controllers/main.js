@@ -9,12 +9,11 @@
  */
 angular.module('webappApp')
   .controller('MainCtrl', function ($scope,$rootScope) {
-    $rootScope.breadcrumbs = [
-        {href:'/', name:'首页'}
-    ];
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+    $rootScope.breadcrumbs = false;
+    $scope.articles = [
+        {id : 1, title : '标题', content: "内容"},
+        {id : 1, title : '标题', content: "内容"},
+        {id : 1, title : '标题', content: "内容"},
+        {id : 1, title : '标题', content: "内容"}
     ];
   });
