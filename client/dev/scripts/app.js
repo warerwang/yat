@@ -24,7 +24,7 @@ angular
         controller: 'MainCtrl'
       })
         .when('/category/:id', {
-            templateUrl: 'views/category.html',
+            templateUrl: 'views/main.html',
             controller: 'CategoryCtrl'
         })
         .when('/article/:id', {

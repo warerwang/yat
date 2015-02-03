@@ -8,12 +8,13 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('MainCtrl', function ($scope,$rootScope) {
+  .controller('MainCtrl', function ($scope,$rootScope, $http, Category) {
     $rootScope.breadcrumbs = false;
-    $scope.articles = [
-        {id : 1, title : '标题', content: "内容"},
-        {id : 1, title : '标题', content: "内容"},
-        {id : 1, title : '标题', content: "内容"},
-        {id : 1, title : '标题', content: "内容"}
-    ];
+    $scope.getCategory = function(cid){
+        return Category.getCategory(cid);
+    }
+    $http.get('/rest/article/index')
+        .success(function(response){
+            $scope.articles = response.data;
+        });
   });
