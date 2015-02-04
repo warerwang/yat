@@ -1,6 +1,6 @@
 <div class="article shadow">
     <div class="article-title">{{article.title}}</div>
-    <div class="article-info">撰写于2013/04/25 发表在 <a href="/category/{{article.cid}}" title="查看 Javascript 中的全部文章" rel="category tag">Javascript</a>, <a href="http://www.wangyingran.com/code" title="查看 代码片段 中的全部文章" rel="category tag">代码片段</a>
+    <div class="article-info">撰写于2013/04/25 发表在 <a href="/category/{{article.cid}}" title="查看 {{getCategory(article.cid).name}} 中的全部文章" rel="category tag">{{getCategory(article.cid).name}}</a>
     </div>
     <div class="article-body" ng-bind-html="article.content"></div>
 </div>

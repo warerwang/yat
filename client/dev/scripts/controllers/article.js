@@ -12,6 +12,9 @@ angular.module('webappApp')
         $rootScope.breadcrumbs = [
             {href:'/', name:'首页'}
         ]
+        $scope.getCategory = function(cid){
+            return Category.getCategory(cid);
+        }
         var id = $routeParams.id;
         $http.get('/rest/article/' + id)
             .success(function(response){
