@@ -16,10 +16,10 @@ angular.module('webappApp')
             return Category.getCategory(cid);
         }
         var cid = $routeParams.id;
-        $rootScope.breadcrumbs.push({href:'/category/' + cid, name:$scope.getCategory(cid).name});
+
         $http.get('/rest/category/' + cid + '/list')
              .success(function(response){
+                $rootScope.breadcrumbs.push({href:'/category/' + cid, name:$scope.getCategory(cid).name});
                 $scope.articles = response.data;
-
-             });
+         });
   });

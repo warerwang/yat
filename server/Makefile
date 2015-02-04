@@ -3,13 +3,13 @@ swagger:
 
 prepare:
 	composer global require "fxp/composer-asset-plugin:~1.0"
-	chmod + x tests/codeception/bin/yii
 	mkdir -p  runtime
 	chmod 777 runtime
 	mkdir -p  dev/assets
 	chmod 777 dev/assets
 	mkdir -p  tmp
 	chmod 777 tmp
+	chmod + x tests/codeception/bin/yii
 
 test:
 	cd tests && ./codeception/bin/yii migrate/up
