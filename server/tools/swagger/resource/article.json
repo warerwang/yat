@@ -1,0 +1,74 @@
+{
+    "basePath": "/",
+    "swaggerVersion": "1.2",
+    "resourcePath": "/article",
+    "apis": [
+        {
+            "path": "/article",
+            "description": "\u6587\u7ae0\u76f8\u5173\u63a5\u53e3api",
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "list",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Article"
+                    },
+                    "notes": "\u5f97\u5230\u6587\u7ae0\u5217\u8868"
+                },
+                {
+                    "method": "POST",
+                    "nickname": "create",
+                    "type": "Article",
+                    "parameters": [
+                        {
+                            "paramType": "form",
+                            "name": "cid",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u5206\u7c7bid"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "title",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u6587\u7ae0\u6807\u9898"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "content",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u6587\u7ae0\u63cf\u8ff0"
+                        }
+                    ],
+                    "notes": "\u6dfb\u52a0\u4e00\u7bc7\u6587\u7ae0"
+                }
+            ]
+        }
+    ],
+    "models": {
+        "Article": {
+            "id": "Article",
+            "description": "\u6587\u7ae0\u6a21\u578b",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "cid": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "create_time": {
+                    "type": "string"
+                },
+                "last_modify": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
