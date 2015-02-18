@@ -2,7 +2,6 @@ swagger:
 	./vendor/zircote/swagger-php/bin/swagger ./controllers/  -o ./tools/swagger/resource
 
 prepare:
-	composer global require "fxp/composer-asset-plugin:~1.0"
 	mkdir -p  runtime
 	chmod 777 runtime
 	mkdir -p  dev/assets
@@ -50,19 +49,11 @@ composer_update:
 	composer update
 
 composer_prepare:
+	composer global require "fxp/composer-asset-plugin:~1.0"
 	composer global require "codeception/codeception=2.0.*"
 	composer global require "codeception/specify=*"
 	composer global require "codeception/verify=*"
 
-deploy_demo:	deploy_prepare
-	echo Deploying to the UCX production server...
-	./deploy_ucx.sh ops47
-
-deploy_forced:	deploy_prepare
-	echo Deploying to the UCX production server, without checks. This is DANGEROUS\!\!
-	./deploy_ucx.sh --force aws-ucx-prod
-
 upload_vendor:
-	rsync -av --delete webapp/vendor --rsh="ssh -p 333" smx@it-deploy.foxitcloud.com:/opt/www/ops30.sumilux.com/
-	rsync -av --delete webapp/vendor --rsh="ssh -p 333" smx@smxhf.sumilux.com:/opt/www/ops30.sumilux.com/
+	rsync -av --delete webapp/vendor --rsh="ssh -p 333" smx@it-deploy.foxitcloud.com:/opt/www/
 
