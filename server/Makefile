@@ -3,12 +3,12 @@ swagger:
 
 prepare:
 	mkdir -p  runtime
-	chmod 777 runtime
+	chmod -R 777 runtime
 	mkdir -p  dev/assets
-	chmod 777 dev/assets
+	chmod -R 777 dev/assets
 	mkdir -p  tmp
 	chmod 777 tmp
-	chmod + x tests/codeception/bin/yii
+	chmod +x tests/codeception/bin/yii
 
 test:
 	cd tests && ./codeception/bin/yii migrate/up
