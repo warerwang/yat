@@ -1,0 +1,133 @@
+{
+    "basePath": "/",
+    "swaggerVersion": "1.2",
+    "resourcePath": "/category",
+    "apis": [
+        {
+            "path": "/category",
+            "description": "\u5206\u7c7b\u76f8\u5173\u63a5\u53e3",
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "index",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Category"
+                    },
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "page",
+                            "type": "integer",
+                            "required": false,
+                            "description": "\u9875\u7801"
+                        }
+                    ],
+                    "notes": "\u5f97\u5230\u5206\u7c7b\u5217\u8868"
+                }
+            ]
+        },
+        {
+            "path": "/category/{id}",
+            "description": "\u6307\u5b9a\u5206\u7c7b\u76f8\u5173\u63a5\u53e3",
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "view",
+                    "type": "Category",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u5206\u7c7bid"
+                        }
+                    ],
+                    "notes": "\u67e5\u8be2\u6307\u5b9a\u5206\u7c7b"
+                }
+            ]
+        },
+        {
+            "path": "/category/{id}/articles",
+            "description": "\u67e5\u8be2\u6307\u5b9a\u5206\u7c7b\u4e0b\u7684\u6587\u4ef6\u5217\u8868",
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "list",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Article"
+                    },
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u5206\u7c7bid"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "page",
+                            "type": "integer",
+                            "required": false,
+                            "description": "\u9875\u7801"
+                        }
+                    ],
+                    "notes": "\u67e5\u8be2\u6307\u5b9a\u5206\u7c7b\u7684\u6587\u4ef6\u5217\u8868"
+                }
+            ]
+        }
+    ],
+    "models": {
+        "Category": {
+            "id": "Category",
+            "description": "\u5206\u7c7b\u6a21\u578b",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "create_time": {
+                    "type": "string"
+                },
+                "last_modify": {
+                    "type": "string"
+                },
+                "sort": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Article": {
+            "id": "Article",
+            "description": "\u6587\u7ae0\u6a21\u578b",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "cid": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "create_time": {
+                    "type": "string"
+                },
+                "last_modify": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
