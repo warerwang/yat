@@ -5,6 +5,10 @@
         {
             "path": "/article.{format}",
             "description": "article api"
+        },
+        {
+            "path": "/category.{format}",
+            "description": "category api"
         }
     ]
 }

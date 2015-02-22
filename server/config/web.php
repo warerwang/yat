@@ -46,12 +46,33 @@ $config = [
                     'class' => \yii\rest\UrlRule::className(),
                     'controller'    => ['category' => 'category', 'article' => 'article'],
                     'extraPatterns' => [
-                        'GET {id}/list' => 'list'
+                        'GET {id}/articles' => 'list'
                     ]
                 ],
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'response' => [
+            'class' => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                //ajax返回的情况
+                if(is_array($response->data)){
+                    unset($response->data['type']);
+                    if($response->isSuccessful){
+                        if(!isset($response->data['data'])){
+                            $response->data = ['data' => $response->data];
+                        }
+                        $response->data['ret'] = 0;
+                    }elseif(isset($response->data['code']) && !empty($response->data['code'])){
+                        $response->data['ret'] = $response->data['code'];
+                    }else{
+                        $response->data['ret'] = 999999;
+                    }
+                }
+            },
+        ],
+
     ],
     'params' => $params,
     'modules' => [

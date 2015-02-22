@@ -21,6 +21,30 @@ class Article extends ArticleBase
         ]);
     }
 
+    public function fields()
+    {
+        return [
+            'id',
+            'cid',
+            'title',
+            'create_time',
+            'last_modify',
+            'summary' => function(){
+                return substr($this->content, 0 ,100);
+            }
+        ];
+    }
+
+    public function extraFields()
+    {
+        return [
+            'category' => function(){
+                return $this->category;
+                },
+            'content'
+        ];
+    }
+
     public function beforeValidate ()
     {
         if (parent::beforeValidate()) {
@@ -32,6 +56,7 @@ class Article extends ArticleBase
             }
             return true;
         }
+        return false;
     }
 
     public function getCategory ()
@@ -46,25 +71,30 @@ class Article extends ArticleBase
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params = [])
     {
         $query = self::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'       => [
+                'attributes'   => [
+                    'last_modify',
+                ],
+                'defaultOrder' => [
+                    'last_modify' => SORT_DESC
+                ]
+            ]
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
+        if(!$this->load($params) && $this->validate()){
             return $dataProvider;
         }
+//        if (!$this->validate()) {
+//            return $dataProvider;
+//        }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'cid'=> $this->cid,
-        ]);
-
+        $query->andFilterWhere(['cid' => $this->cid]);
         $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;

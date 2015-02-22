@@ -24,60 +24,68 @@ use app\models\Category;
  *      @SWG\Property(name="id",type="string"),
  *      @SWG\Property(name="cid",type="string"),
  *      @SWG\Property(name="title",type="string"),
+ *      @SWG\Property(name="content",type="string"),
+ *      @SWG\Property(name="summary",type="string"),
  *      @SWG\Property(name="create_time",type="string"),
  *      @SWG\Property(name="last_modify",type="string"),
- * )
- *
- *
- * @SWG\Api(
- *   path="/article",
- *   description="文章相关接口api",
- *   @SWG\Operation(
- *      method="GET",
- *      type="array",
- *      @SWG\Items("Article"),
- *      nickname="list",
- *      notes="得到文章列表",
- *   ),
- *   @SWG\Operation(
- *      method="POST",
- *      type="Article",
- *      nickname="create",
- *      notes="添加一篇文章",
- *      @SWG\Parameter(
- *          name="cid",
- *          paramType="form",
- *          required=true,
- *          type="string",
- *          description="分类id"
- *      ),
- *      @SWG\Parameter(
- *          name="title",
- *          paramType="form",
- *          required=true,
- *          type="string",
- *          description="文章标题"
- *      ),
- *      @SWG\Parameter(
- *          name="content",
- *          paramType="form",
- *          required=true,
- *          type="string",
- *          description="文章描述"
- *      ),
- *   ),
  * )
  */
 class ArticleController extends RestController
 {
+
+    /**
+     * @SWG\Api(
+     *   path="/article",
+     *   description="文章相关接口api",
+     *   @SWG\Operation(
+     *      method="GET",
+     *      type="array",
+     *      @SWG\Items("Article"),
+     *      nickname="list",
+     *      notes="得到所有文章列表",
+     *      @SWG\Parameter(
+     *          name="page",
+     *          paramType="query",
+     *          required=false,
+     *          type="integer",
+     *          description="页码"
+     *      ),
+     *   )
+     * )
+     * @return \yii\data\ActiveDataProvider
+     */
     public function actionIndex ()
     {
-        return ['data' => Article::find()->all()];
+        $article = new Article();
+        return $article->search();
     }
 
+    /**
+     *   @SWG\Api(
+     *   path="/article/{id}",
+     *   description="指定文章的相关接口",
+     *   @SWG\Operation(
+     *      method="GET",
+     *      type="Article",
+     *      nickname="view",
+     *      notes="得到文章的详细信息",
+     *      @SWG\Parameter(
+     *          name="id",
+     *          paramType="path",
+     *          required=true,
+     *          type="string",
+     *          description="文章id"
+     *      ),
+     *   )
+     * )
+     * @param $id
+     *
+     * @return static
+     */
     public function actionView ($id)
     {
-        return ['data' => Article::findOne($id)];
+        \Yii::$app->request->setQueryParams(['expand' => 'content,category']);
+        return Article::findOne($id);
     }
 
 

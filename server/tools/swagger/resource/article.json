@@ -14,36 +14,37 @@
                     "items": {
                         "$ref": "Article"
                     },
-                    "notes": "\u5f97\u5230\u6587\u7ae0\u5217\u8868"
-                },
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "page",
+                            "type": "integer",
+                            "required": false,
+                            "description": "\u9875\u7801"
+                        }
+                    ],
+                    "notes": "\u5f97\u5230\u6240\u6709\u6587\u7ae0\u5217\u8868"
+                }
+            ]
+        },
+        {
+            "path": "/article/{id}",
+            "description": "\u6307\u5b9a\u6587\u7ae0\u7684\u76f8\u5173\u63a5\u53e3",
+            "operations": [
                 {
-                    "method": "POST",
-                    "nickname": "create",
+                    "method": "GET",
+                    "nickname": "view",
                     "type": "Article",
                     "parameters": [
                         {
-                            "paramType": "form",
-                            "name": "cid",
+                            "paramType": "path",
+                            "name": "id",
                             "type": "string",
                             "required": true,
-                            "description": "\u5206\u7c7bid"
-                        },
-                        {
-                            "paramType": "form",
-                            "name": "title",
-                            "type": "string",
-                            "required": true,
-                            "description": "\u6587\u7ae0\u6807\u9898"
-                        },
-                        {
-                            "paramType": "form",
-                            "name": "content",
-                            "type": "string",
-                            "required": true,
-                            "description": "\u6587\u7ae0\u63cf\u8ff0"
+                            "description": "\u6587\u7ae0id"
                         }
                     ],
-                    "notes": "\u6dfb\u52a0\u4e00\u7bc7\u6587\u7ae0"
+                    "notes": "\u5f97\u5230\u6587\u7ae0\u7684\u8be6\u7ec6\u4fe1\u606f"
                 }
             ]
         }
@@ -60,6 +61,12 @@
                     "type": "string"
                 },
                 "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "summary": {
                     "type": "string"
                 },
                 "create_time": {
