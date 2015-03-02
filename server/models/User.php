@@ -1,16 +1,51 @@
 <?php
 
 namespace app\models;
+
+use app\components\Tools;
+use app\exceptions\UserException;
 use app\models\base\UsersBase;
+use yii\base\ModelEvent;
+use yii\db\BaseActiveRecord;
+use yii\db\Exception;
 
 class User extends UsersBase implements \yii\web\IdentityInterface
 {
     const GROUP_ADMIN = 1;
+    const GROUP_USER  = 2;
+    public $groups = [
+        self::GROUP_ADMIN => '管理员',
+        self::GROUP_USER  => '普通用户',
+    ];
     public $authKey;
+
+    public function fields ()
+    {
+        return [
+            'id',
+            'email',
+            'group_id',
+            'nickname',
+            'access_token',
+            'create_time',
+            'last_activity'
+        ];
+    }
+
+    public function rules ()
+    {
+        $rules = parent::rules();
+
+        return array_merge([
+            ['email', 'email'],
+            ['group_id', 'in', 'range' => [self::GROUP_USER, self::GROUP_ADMIN]]
+        ], $rules);
+    }
+
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
+    public static function findIdentity ($id)
     {
         return self::findOne($id);
     }
@@ -18,7 +53,7 @@ class User extends UsersBase implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public static function findIdentityByAccessToken ($token, $type = null)
     {
         return self::findOne(['access-token' => $token]);
     }
@@ -27,18 +62,18 @@ class User extends UsersBase implements \yii\web\IdentityInterface
      * Finds user by username
      *
      * @param  string $email
+     *
      * @return static|null
      */
-    public static function findByUsername($email)
+    public static function findByUsername ($email)
     {
         return self::findOne(['email' => $email]);
     }
 
-
     /**
      * @inheritdoc
      */
-    public function getAuthKey()
+    public function getAuthKey ()
     {
         return $this->authKey;
     }
@@ -46,7 +81,7 @@ class User extends UsersBase implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
-    public function validateAuthKey($authKey)
+    public function validateAuthKey ($authKey)
     {
         return $this->authKey === $authKey;
     }
@@ -54,10 +89,11 @@ class User extends UsersBase implements \yii\web\IdentityInterface
     /**
      * Validates password
      *
-     * @param  string  $password password to validate
+     * @param  string $password password to validate
+     *
      * @return boolean if password provided is valid for current user
      */
-    public function validatePassword($password)
+    public function validatePassword ($password)
     {
         return $this->password === md5($password . $this->salt);
     }
@@ -65,13 +101,35 @@ class User extends UsersBase implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
-    public function getId()
+    public function getId ()
     {
         return $this->id;
     }
 
-    public function getName()
+    public function getName ()
     {
-        return $this->nickname ?: $this->email;
+        return $this->nickname ? : $this->email;
+    }
+
+    public function beforeSave ($insert)
+    {
+        if($insert){
+            $this->access_token = md5(microtime(true));
+        }
+    }
+
+    public static function create ($email, $password, $group_id = self::GROUP_USER, $nickname = '')
+    {
+        $user           = new self();
+        $user->email    = $email;
+        $user->salt     = strval(rand(100000, 999999));
+        $user->password = md5($password . $user->salt);
+        $user->group_id = $group_id;
+        $user->nickname = $nickname;
+        if ($user->validate() && $user->save()) {
+            return $user;
+        } else {
+            throw new UserException("注册用户失败,错误信息: " . Tools::getFirstError($user));
+        }
     }
 }

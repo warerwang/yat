@@ -33,7 +33,7 @@ class UsersBase extends Model
     public function rules()
     {
         return [
-            [['id', 'email', 'password', 'salt', 'nickname'], 'required'],
+            [['id', 'email', 'password', 'salt'], 'required'],
             [['group_id'], 'integer'],
             [['create_time', 'last_activity'], 'safe'],
             [['id'], 'string', 'max' => 20],
@@ -41,7 +41,7 @@ class UsersBase extends Model
             [['password', 'access_token'], 'string', 'max' => 32],
             [['salt'], 'string', 'max' => 8],
             [['nickname'], 'string', 'max' => 50],
-            [['access_token'], 'unique']
+            [['email', 'access_token'], 'unique']
         ];
     }
 

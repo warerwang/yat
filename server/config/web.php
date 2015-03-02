@@ -44,7 +44,7 @@ $config = [
             'rules' => [
                 [
                     'class' => \yii\rest\UrlRule::className(),
-                    'controller'    => ['category' => 'category', 'article' => 'article'],
+                    'controller'    => ['category' => 'category', 'article' => 'article', 'user' => 'user'],
                     'extraPatterns' => [
                         'GET {id}/articles' => 'list'
                     ]
