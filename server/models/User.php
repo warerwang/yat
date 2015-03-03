@@ -13,6 +13,9 @@ class User extends UsersBase implements \yii\web\IdentityInterface
 {
     const GROUP_ADMIN = 1;
     const GROUP_USER  = 2;
+
+    const EXPIRE_TIME = 3600;
+
     public $groups = [
         self::GROUP_ADMIN => '管理员',
         self::GROUP_USER  => '普通用户',
@@ -55,7 +58,8 @@ class User extends UsersBase implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken ($token, $type = null)
     {
-        return self::findOne(['access-token' => $token]);
+        return self::find()->andWhere(['access-token' => $token])->andWhere('last_activity	> ' . (time() - self::EXPIRE_TIME))->one();
+//        return self::findOne(['access-token' => $token]);
     }
 
     /**
@@ -111,11 +115,10 @@ class User extends UsersBase implements \yii\web\IdentityInterface
         return $this->nickname ? : $this->email;
     }
 
-    public function beforeSave ($insert)
+    public function afterFind ()
     {
-        if($insert){
-            $this->access_token = md5(microtime(true));
-        }
+        parent::afterFind();
+        $this->updateAttributes(['last_activity' => (new \DateTime())->format('Y-m-d H:i:s')]);
     }
 
     public static function create ($email, $password, $group_id = self::GROUP_USER, $nickname = '')
@@ -126,7 +129,8 @@ class User extends UsersBase implements \yii\web\IdentityInterface
         $user->password = md5($password . $user->salt);
         $user->group_id = $group_id;
         $user->nickname = $nickname;
-        if ($user->validate() && $user->save()) {
+        $user->access_token = md5(microtime(true));
+        if ($user->save()) {
             return $user;
         } else {
             throw new UserException("注册用户失败,错误信息: " . Tools::getFirstError($user));

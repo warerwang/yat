@@ -47,6 +47,9 @@ $config = [
                     'controller'    => ['category' => 'category', 'article' => 'article', 'user' => 'user'],
                     'extraPatterns' => [
                         'GET {id}/articles' => 'list'
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:(\d+|[\w@\.]+)>',
                     ]
                 ],
             ],
@@ -69,6 +72,7 @@ $config = [
                     }else{
                         $response->data['ret'] = 999999;
                     }
+                    unset($response->data['code']);
                 }
             },
         ],

@@ -21,4 +21,10 @@ class Tools
             return $error[0];
         }
     }
+
+    public static function getDateTime()
+    {
+        $dateTime = new \DateTime();
+        return $dateTime->format("Y-m-d H:i:s");
+    }
 } 

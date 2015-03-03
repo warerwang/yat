@@ -39,6 +39,34 @@
             ]
         },
         {
+            "path": "/user/access-token",
+            "description": "Access-token\u76f8\u5173\u63a5\u53e3",
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "create",
+                    "type": "User",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "email",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u7528\u6237email"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "password",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u7528\u6237\u5bc6\u7801"
+                        }
+                    ],
+                    "notes": "\u7528\u6237\u767b\u9646"
+                }
+            ]
+        },
+        {
             "path": "/user/{id}",
             "description": "\u7528\u6237\u4fe1\u606f\u76f8\u5173\u63a5\u53e3",
             "operations": [
@@ -67,7 +95,7 @@
                             "name": "id",
                             "type": "string",
                             "required": true,
-                            "description": "\u7528\u6237id"
+                            "description": "\u7528\u6237id\u6216\u8005email"
                         },
                         {
                             "paramType": "form",
