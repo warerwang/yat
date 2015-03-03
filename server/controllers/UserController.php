@@ -211,7 +211,7 @@ class UserController extends RestController
 
         return [
             'access_token' => $user->access_token,
-            'expire_time'  => time() + User::EXPIRE_TIME
+            'expire_time'  => date('Y-m-d H:i:s', time() + User::EXPIRE_TIME)
         ];
     }
 
