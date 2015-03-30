@@ -15,3 +15,6 @@ config 服务器配置
 开放环境需要 nodejs npm grunt-cli compass karma-cli ruby composer codecept
 部署
 make deploy
+
+
+grunt serve 开启测试

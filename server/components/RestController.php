@@ -15,17 +15,19 @@ use yii\filters\auth\QueryParamAuth;
 
 class RestController extends Controller
 {
+    public $safeActions = [];
     public function behaviors ()
     {
         $behaviors                  = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class'       => CompositeAuth::className(),
-            'authMethods' => [
-                HttpBearerAuth::className(),
-                QueryParamAuth::className(),
-            ],
-        ];
-
+        if(!in_array($this->action->id, $this->safeActions)){
+            $behaviors['authenticator'] = [
+                'class'       => CompositeAuth::className(),
+                'authMethods' => [
+                    HttpBearerAuth::className(),
+                    QueryParamAuth::className(),
+                ],
+            ];
+        }
         return $behaviors;
     }
 } 

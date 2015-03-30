@@ -32,6 +32,7 @@ use yii\web\NotFoundHttpException;
  */
 class CategoryController extends RestController
 {
+    public $safeActions = ['index', 'view', 'list'];
     /**
      * @SWG\Api(
      *   path="/category",

@@ -61,7 +61,6 @@ $config = [
                 $response = $event->sender;
                 //ajax返回的情况
                 if(is_array($response->data)){
-                    unset($response->data['type']);
                     if($response->isSuccessful){
                         if(!isset($response->data['data'])){
                             $response->data = ['data' => $response->data];
@@ -72,7 +71,7 @@ $config = [
                     }else{
                         $response->data['ret'] = 999999;
                     }
-                    unset($response->data['code']);
+                    unset($response->data['code'],$response->data['type']);
                 }
             },
         ],
