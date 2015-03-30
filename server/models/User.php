@@ -29,7 +29,7 @@ class User extends UsersBase implements \yii\web\IdentityInterface
             'email',
             'group_id',
             'nickname',
-            'access_token',
+//            'access_token',
             'create_time',
             'last_activity'
         ];

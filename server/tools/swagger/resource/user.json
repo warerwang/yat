@@ -67,6 +67,18 @@
             ]
         },
         {
+            "path": "/user/current",
+            "description": "\u5f53\u524d\u7528\u6237\u76f8\u5173\u63a5\u53e3",
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "current",
+                    "type": "User",
+                    "notes": "\u7528\u6237\u767b\u9646"
+                }
+            ]
+        },
+        {
             "path": "/user/{id}",
             "description": "\u7528\u6237\u4fe1\u606f\u76f8\u5173\u63a5\u53e3",
             "operations": [

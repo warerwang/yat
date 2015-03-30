@@ -34,37 +34,23 @@ use yii\web\Response;
  */
 class UserController extends RestController
 {
-    public function behaviors ()
-    {
-        if (in_array($this->action->id, ['view','create', 'access-token'])) {
-
-            return [
-                'contentNegotiator' => [
-                    'class'   => ContentNegotiator::className(),
-                    'formats' => [
-                        'application/json' => Response::FORMAT_JSON,
-                        'application/xml'  => Response::FORMAT_XML,
-                    ],
-                ],
-            ];
-        } else {
-            return parent::behaviors();
-        }
-    }
+    public $safeActions = ['view', 'create', 'access-token'];
 
     /**
      * @param \app\models\User $user
+     *
+     * @throws \app\exceptions\UserException
      */
     public function checkAccess ($user)
     {
         if (empty($user)) {
-            throw new UserException("用户不存在.");
+            throw new UserException(UserException::USER_IS_NOT_EXIST, UserException::USER_IS_NOT_EXIST_CODE);
         }
     }
 
     public function actionIndex ()
     {
-        //        return $category;
+
     }
 
     /**
@@ -120,6 +106,9 @@ class UserController extends RestController
         $nickname = $request->post('nickname');
         $user     = $this->findModel($id);
         $this->checkAccess($user);
+        if (Yii::$app->user->identity['group_id'] != User::GROUP_ADMIN) {
+            throw new UserException(UserException::PERMISSION_DENIED, UserException::PERMISSION_DENIED_CODE);
+        }
         $user->nickname = $nickname;
 
         return $user;
@@ -202,9 +191,7 @@ class UserController extends RestController
         $email    = $request->get('email');
         $password = $request->get('password');
         $user     = User::findOne(['email' => $email]);
-        if (empty($user)) {
-            throw new UserException(UserException::USER_IS_NOT_EXIST, UserException::USER_IS_NOT_EXIST_CODE);
-        }
+        $this->checkAccess($user);
         if (!$user->validatePassword($password)) {
             throw new UserException(UserException::PASSWORD_IS_INVALID, UserException::PASSWORD_IS_INVALID_CODE);
         }
@@ -215,16 +202,36 @@ class UserController extends RestController
         ];
     }
 
+    /**
+     * @SWG\Api(
+     *   path="/user/current",
+     *   description="当前用户相关接口",
+     *   @SWG\Operation(
+     *      method="GET",
+     *      type="User",
+     *      nickname="current",
+     *      notes="用户登陆",
+     *   ),
+     * )
+     */
+    public function actionCurrent ()
+    {
+        return Yii::$app->user->identity;
+    }
+
     public function actionUpdatePassword ($oldpassword, $newpassword)
     {
+
     }
 
     public function actionGetResetPasswordCode ($email)
     {
+
     }
 
     public function actionUpdatePasswordByResetCode ($email, $code, $password)
     {
+
     }
 
     private function findModel ($idOrEmail)

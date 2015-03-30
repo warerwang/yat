@@ -32,7 +32,7 @@ use app\models\Category;
  */
 class ArticleController extends RestController
 {
-
+    public $safeActions = ['index', 'view'];
     /**
      * @SWG\Api(
      *   path="/article",
