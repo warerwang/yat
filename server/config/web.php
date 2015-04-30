@@ -17,7 +17,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-            'loginUrl' => ['admin/default/signin']
+            'loginUrl' => ['admin/default/sign-in']
         ],
         'errorHandler' => [
             'errorAction' => 'admin/default/error',

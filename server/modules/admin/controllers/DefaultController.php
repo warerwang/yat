@@ -16,12 +16,7 @@ class DefaultController extends BaseController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['signin'],
-                        'allow'   => false,
-                        'roles'   => ['@'],
-                    ],
-                    [
-                        'actions' => ['signin'],
+                        'actions' => ['sign-in'],
                         'allow'   => true,
                         'roles'   => ['?'],
                     ],
@@ -52,7 +47,7 @@ class DefaultController extends BaseController
         return $this->render('index');
     }
 
-    public function actionSignin ()
+    public function actionSignIn ()
     {
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -65,7 +60,7 @@ class DefaultController extends BaseController
         }
     }
 
-    public function actionSignout ()
+    public function actionSignOut ()
     {
         Yii::$app->user->logout();
         return $this->goHome();

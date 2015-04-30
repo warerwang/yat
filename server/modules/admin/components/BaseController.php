@@ -26,8 +26,8 @@ class BaseController extends Controller
         $webUser = Yii::$app->user;
         if($webUser->isGuest){
             $this->navbarItems[] = ['label' => 'Login', 'url' => ['default/signin']];
-        }elseif($webUser->identity->group_id != User::GROUP_ADMIN){
-            throw new ForbiddenHttpException("Forbidden");
+//        }elseif($webUser->identity->group_id != User::GROUP_ADMIN){
+//            throw new ForbiddenHttpException("Forbidden");
         }else{
             $this->navbarItems = [
                 ['label' => '首页', 'url' => ['default/index']],

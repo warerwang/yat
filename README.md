@@ -11,8 +11,13 @@ server 服务器
 
 config 服务器配置
 
+安装
+server
+composer install
+client
+npm install
 
-开放环境需要 nodejs npm grunt-cli compass karma-cli ruby composer codecept
+开发环境需要 nodejs npm grunt-cli compass karma-cli ruby composer codecept
 部署
 make deploy
 
