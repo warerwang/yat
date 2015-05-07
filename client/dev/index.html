@@ -16,7 +16,7 @@
     <!-- endbuild -->
     <!--<link href="http://typo.sofi.sh/typo.css" rel="stylesheet">-->
   </head>
-  <body ng-app="webappApp">
+  <body ng-app="webappApp" ng-controller="BaseCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -42,9 +42,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a ng-href="#" ng-hide="isSign" ng-click="showSignModal()">登陆</a></li>
-                        <li><a ng-href="#" ng-hide="isSign" ng-click="showSignUpModal()">注册</a></li>
-                        <li><a ng-href="#" ng-show="isSign" ng-click="signOut()">退出</a></li>
+                        <li><a ng-href="#" ng-hide="isAuthorized" ng-click="showSignModal()">登陆</a></li>
+                        <li><a ng-href="#" ng-hide="isAuthorized" ng-click="showSignUpModal()">注册</a></li>
+                        <li><a ng-href="#" ng-show="isAuthorized" ng-click="signOut()"><span ng-bind="currentUser.nickname"></span> 退出</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
@@ -107,9 +107,12 @@
         <script src="scripts/controllers/header.js"></script>
         <script src="scripts/controllers/signinmodal.js"></script>
         <script src="scripts/services/category.js"></script>
+        <script src="scripts/services/auth.js"></script>
+        <script src="scripts/services/session.js"></script>
         <script src="scripts/controllers/article.js"></script>
         <script src="scripts/controllers/category.js"></script>
         <script src="scripts/controllers/rightside.js"></script>
+        <script src="scripts/controllers/base.js"></script>
         <!-- endbuild -->
 </body>
 </html>

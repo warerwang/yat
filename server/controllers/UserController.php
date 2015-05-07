@@ -27,6 +27,8 @@ use yii\web\Response;
  * @SWG\Property(name="last_activity",type="string"),
  * )
  * @SWG\Model(id="AccessToken", description="登陆凭证")(
+ * @SWG\Property(name="id",type="string"),
+ * @SWG\Property(name="nickname",type="string"),
  * @SWG\Property(name="access_token",type="string"),
  * @SWG\Property(name="expire_time",type="string"),
  * )
@@ -197,7 +199,9 @@ class UserController extends RestController
         }
 
         return [
-            'access_token' => $user->access_token,
+	        'id'           => $user->id,
+	        'nickname'     => $user->nickname,
+	        'access_token' => $user->access_token,
             'expire_time'  => date('Y-m-d H:i:s', time() + User::EXPIRE_TIME)
         ];
     }
