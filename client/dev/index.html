@@ -25,7 +25,7 @@
     <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
-    <div class="header" ng-controller="HeaderCtrl">
+    <div class="header">
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -44,7 +44,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a ng-href="#" ng-hide="isAuthorized" ng-click="showSignModal()">登陆</a></li>
                         <li><a ng-href="#" ng-hide="isAuthorized" ng-click="showSignUpModal()">注册</a></li>
-                        <li><a ng-href="#" ng-show="isAuthorized" ng-click="signOut()"><span ng-bind="currentUser.nickname"></span> 退出</a></li>
+                        <li><a ng-href="#" ng-show="isAuthorized" ng-click="signOut()"><span ng-bind="currentUser.email"></span> 退出</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
