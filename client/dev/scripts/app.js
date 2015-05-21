@@ -27,6 +27,10 @@ angular
             templateUrl: 'views/main.html',
             controller: 'CategoryCtrl'
         })
+        .when('/article/post', {
+            templateUrl: 'views/article-post.html',
+            controller: 'ArticlePostCtrl'
+        })
         .when('/article/:id', {
             templateUrl: 'views/article.html',
             controller: 'ArticleCtrl'

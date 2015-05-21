@@ -8,7 +8,8 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('BaseCtrl', function ($scope, AuthService, Session) {
+  .controller('BaseCtrl', function ($scope, AuthService, Session, ArticleServ) {
+        
         $scope.currentUser = null;
         $scope.isAuthorized = AuthService.isAuthenticated();
 

@@ -12,8 +12,12 @@ angular.module('webappApp')
         $scope.isActive = function(url){
             return url == $location.$$url;
         };
-        $http.get('/rest/category').success(function(response){
-            $scope.categorys = response.data;
-            Category.setCategorys($scope.categorys);
-        });
+        Category.getCategorys()
+            .then(function(categorys){
+                $scope.categorys = categorys;
+            });
+//        $http.get('/rest/category').success(function(response){
+//            $scope.categorys = response.data;
+//            Category.setCategorys($scope.categorys);
+//        });
   });

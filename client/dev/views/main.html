@@ -1,3 +1,9 @@
+<div class="row" ng-show="isAuthorized">
+    <div class="col-xs-12">
+        <a href="/article/post" class="btn btn-primary pull-right">发布文章</a>
+    </div>
+</div>
+<br />
 <div class="article-list shadow" ng-repeat="article in articles">
     <div class="article-title">
         <a ng-href="/article/{{article.id}}" title="{{article.title}}">{{article.title}}</a>

@@ -32,7 +32,7 @@ use app\models\Category;
  */
 class ArticleController extends RestController
 {
-    public $safeActions = ['index', 'view'];
+    public $safeActions = ['index', 'view', 'create'];
     /**
      * @SWG\Api(
      *   path="/article",
@@ -86,6 +86,17 @@ class ArticleController extends RestController
     {
         \Yii::$app->request->setQueryParams(['expand' => 'content,category']);
         return Article::findOne($id);
+    }
+
+    public function actionCreate ()
+    {
+        $model = new Article();
+        $data = json_decode(\Yii::$app->request->rawBody, true);
+        $model->cid = $data['cid'];
+        $model->title = $data['title'];
+        $model->content = $data['content'];
+        $model->save();
+        return $model;
     }
 
 

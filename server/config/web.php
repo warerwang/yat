@@ -46,8 +46,9 @@ $config = [
                     'class' => \yii\rest\UrlRule::className(),
                     'controller'    => ['category' => 'category', 'article' => 'article', 'user' => 'user'],
                     'extraPatterns' => [
-                        'GET -/current'       => 'current',
-                        'GET {id}/articles' => 'list'
+                        'GET -/current'     => 'current',
+                        'GET {id}/articles' => 'list',
+                        'POST'              => 'create'
                     ],
                     'tokens' => [
                         '{id}' => '<id:(\d+|[\w@\.]+)>',
