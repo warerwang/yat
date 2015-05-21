@@ -23,3 +23,14 @@ make deploy
 
 
 grunt serve 开启测试
+
+
+初次安装.
+cd yat/server
+make composer_prepare
+make composer_install
+make prepare
+bower install
+
+cd yat/client
+make prepare

@@ -9,6 +9,7 @@ prepare:
 	mkdir -p  tmp
 	chmod 777 tmp
 	chmod +x tests/codeception/bin/yii
+	./yii migrate
 
 test:
 	cd tests && ./codeception/bin/yii migrate/up
@@ -53,7 +54,3 @@ composer_prepare:
 	composer global require "codeception/codeception=2.0.*"
 	composer global require "codeception/specify=*"
 	composer global require "codeception/verify=*"
-
-upload_vendor:
-	rsync -av --delete webapp/vendor --rsh="ssh -p 333" smx@it-deploy.foxitcloud.com:/opt/www/
-

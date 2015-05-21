@@ -8,15 +8,11 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('HeaderCtrl', function ($scope, $http, $location) {
-        $scope.isSign = true;
+  .controller('HeaderCtrl', function ($scope, $http, $rootScope, $location, Session) {
         $scope.showSignModal = function(){
             $('#signModal').modal('show');
         };
         $scope.showSignUpModal = function(){
-            $scope.isSign = true;
-        };
-        $scope.signOut = function(){
-            $scope.isSign = false;
+	        
         };
   });
