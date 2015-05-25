@@ -11,6 +11,8 @@ namespace app\controllers;
 use app\components\RestController;
 use app\models\Article;
 use app\models\Category;
+use yii\base\UserException;
+use yii\web\NotFoundHttpException;
 
 /**
  *
@@ -32,7 +34,19 @@ use app\models\Category;
  */
 class ArticleController extends RestController
 {
-    public $safeActions = ['index', 'view', 'create'];
+    const ARTICLE_IS_NOT_EXIST = 200001;
+
+    public function init ()
+    {
+        $this->errorMessage = array_merge(
+            [
+                self::ARTICLE_IS_NOT_EXIST => '文章不存在'
+            ]
+            , $this->errorMessage
+        );
+    }
+
+    public $safeActions = ['index', 'view'];
     /**
      * @SWG\Api(
      *   path="/article",
@@ -85,7 +99,9 @@ class ArticleController extends RestController
     public function actionView ($id)
     {
         \Yii::$app->request->setQueryParams(['expand' => 'content,category']);
-        return Article::findOne($id);
+        $model = Article::findOne($id);
+        $this->checkModel($model);
+        return $model;
     }
 
     public function actionCreate ()
@@ -99,5 +115,29 @@ class ArticleController extends RestController
         return $model;
     }
 
+    public function actionUpdate ($id)
+    {
+        $model = Article::findOne($id);
+        $this->checkModel($model);
+        $data = json_decode(\Yii::$app->request->rawBody, true);
 
+    }
+
+    public function actionDelete ($id)
+    {
+        $model = Article::findOne($id);
+        $this->checkModel($model);
+        if($model->delete()){
+            return true;
+        }else{
+            throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
+        }
+    }
+
+    public function checkModel($model)
+    {
+        if(empty($model)) {
+            throw new NotFoundHttpException($this->errorMessage[self::ARTICLE_IS_NOT_EXIST], self::ARTICLE_IS_NOT_EXIST);
+        }
+    }
 } 

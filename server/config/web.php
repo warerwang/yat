@@ -6,6 +6,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'zh-cn',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -46,12 +47,14 @@ $config = [
                     'class' => \yii\rest\UrlRule::className(),
                     'controller'    => ['category' => 'category', 'article' => 'article', 'user' => 'user'],
                     'extraPatterns' => [
-                        'GET -/current'     => 'current',
+                        'GET {email}'       => 'get-email',
+                        'GET current'       => 'current',
                         'GET {id}/articles' => 'list',
                         'POST'              => 'create'
                     ],
                     'tokens' => [
-                        '{id}' => '<id:(\d+|[\w@\.]+)>',
+                        '{id}'      => '<id:\d+>',
+                        '{email}'   => '<email:.+@.+>'
                     ]
                 ],
             ],
@@ -60,20 +63,10 @@ $config = [
         'response' => [
             'class' => 'yii\web\Response',
             'on beforeSend' => function ($event) {
+                /** @var yii\web\Response $response */
                 $response = $event->sender;
-                //ajax返回的情况
-                if(is_array($response->data)){
-                    if($response->isSuccessful){
-                        if(!isset($response->data['data'])){
-                            $response->data = ['data' => $response->data];
-                        }
-                        $response->data['ret'] = 0;
-                    }elseif(isset($response->data['code']) && !empty($response->data['code'])){
-                        $response->data['ret'] = $response->data['code'];
-                    }else{
-                        $response->data['ret'] = 999999;
-                    }
-                    unset($response->data['code'],$response->data['type']);
+                if(!$response->isSuccessful && is_array($response->data) && isset($response->data['type'])){
+                     unset($response->data['type']);
                 }
             },
         ],

@@ -58,8 +58,8 @@ class User extends UsersBase implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken ($token, $type = null)
     {
-        return self::find()->andWhere(['access_token' => $token])->andWhere('last_activity	> ' . (time() - self::EXPIRE_TIME))->one();
-//        return self::findOne(['access-token' => $token]);
+        $user = self::find()->andWhere(['access_token' => $token])->andWhere('last_activity	> ' . (time() - self::EXPIRE_TIME))->one();
+        return $user;
     }
 
     /**
