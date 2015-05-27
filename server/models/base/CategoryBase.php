@@ -29,10 +29,8 @@ class CategoryBase extends Model
     public function rules()
     {
         return [
-            [['id', 'name'], 'required'],
-            [['create_time', 'last_modify'], 'safe'],
+            [['name'], 'required'],
             [['sort'], 'integer'],
-            [['id'], 'string', 'max' => 20],
             [['name'], 'string', 'max' => 50]
         ];
     }
