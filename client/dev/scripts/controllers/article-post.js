@@ -7,11 +7,7 @@
  * # ArticlePostCtrl
  * Controller of the webappApp
  */
-angular.module('webappApp').controller('ArticlePostCtrl', function ($scope, Category, ArticleServ, $location) {
-        Category.getCategorys()
-            .then(function (categorys) {
-                $scope.categorys = categorys;
-            });
+angular.module('webappApp').controller('ArticlePostCtrl', function ($scope, CategoryServ, ArticleServ, $location) {
         $scope.article = new ArticleServ;
         $scope.post = function(){
             $scope.article.$save(function(response){

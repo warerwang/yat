@@ -8,17 +8,14 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('ArticleCtrl', function ($scope, $http, $routeParams, $rootScope, Category, ArticleServ) {
+  .controller('ArticleCtrl', function ($scope, $http, $routeParams, $rootScope, CategoryServ, ArticleServ) {
         $rootScope.breadcrumbs = [
             {href:'/', name:'首页'}
         ]
-        $scope.getCategory = function(cid){
-            return Category.getCategory(cid);
-        }
         var id = $routeParams.id;
-        ArticleServ.get({aid:id}, function(response) {
-            $scope.article = response.data;
-            $rootScope.breadcrumbs.push({href:'/category/' + $scope.article.cid, name:Category.getCategory($scope.article.cid).name});
-            $rootScope.breadcrumbs.push({href:'#', name:$scope.article.title});
+        ArticleServ.get({aid:id}, function(article) {
+            $scope.article = article;
+            $rootScope.breadcrumbs.push({href:'/category/' + article.cid, name:$scope.getCategory(article.cid).name});
+            $rootScope.breadcrumbs.push({href:'#', name:article.title});
         });
   });

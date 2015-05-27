@@ -8,16 +8,12 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('RightsideCtrl', function ($scope, $location, $http, Category) {
+  .controller('RightsideCtrl', function ($scope, $location, $http, CategoryServ) {
         $scope.isActive = function(url){
             return url == $location.$$url;
         };
-        Category.getCategorys()
-            .then(function(categorys){
-                $scope.categorys = categorys;
-            });
-//        $http.get('/rest/category').success(function(response){
-//            $scope.categorys = response.data;
-//            Category.setCategorys($scope.categorys);
-//        });
+        CategoryServ.query(function(categories){
+            $scope.categories = categories;
+            $scope.setCategories(categories);
+        });
   });

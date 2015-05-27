@@ -4,40 +4,38 @@
 
 angular.module('webappApp')
 
-    .factory('AuthService', function ($http, Session) {
+    .factory('AuthService', function ($http, Session, API_BASE_URL) {
         var authService = {};
 
         authService.login = function (email, password) {
-            return $http.get('/rest/user/access-token?email=' + email + '&password=' + password).then(function (res) {
-                    if (res.data.ret == 0) {
-                        Session.create(res.data.data.access_token);
-                    }
-                    return res.data;
-                }, function (res) {
-                    return res.data;
-                });
+            return $http.get(API_BASE_URL + '/user/access-token?email=' + email + '&password=' + password);
         };
 
         authService.signUp = function (email, password) {
-            return $http.post('/rest/user', {email: email, password: password}).then(function (res) {
-                    if (res.data.ret == 0) {
-                        Session.create(res.data.data.access_token);
-                    }
-                    return res.data;
+            return $http.post(API_BASE_URL + '/user', {email: email, password: password});
+            return $http.post(API_BASE_URL + '/user', {email: email, password: password})
+                .then(function (res) {
+                    Session.create(res.data.access_token);
+                    return res;
                 }, function (res) {
-                    return res.data;
+                console.log(res);
+                    return res;
                 });
         };
 
         authService.loginByAccessToken = function (access_token) {
-            return $http.get('/rest/user/-/current?access-token=' + access_token).then(function (res) {
-                    return res.data.data;
+            return $http.get(API_BASE_URL + '/user/current?access-token=' + access_token).then(function (res) {
+                    return res.data;
                 });
         };
 
         authService.isAuthenticated = function () {
             return !!Session.access_token;
         };
+
+        authService.saveAccessToken = function (access_token){
+            Session.create(access_token);
+        }
 
         return authService;
     });

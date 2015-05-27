@@ -47,4 +47,5 @@ angular
 		sessionTimeout: 'auth-session-timeout',
 		notAuthenticated: 'auth-not-authenticated',
 		notAuthorized: 'auth-not-authorized'
-	});
+	})
+    .constant('API_BASE_URL', 'http://api.yat.com');

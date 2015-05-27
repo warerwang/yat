@@ -42,4 +42,19 @@ angular.module('webappApp')
             $('#sign-up-modal').modal('show');
             return false;
         };
+
+        $scope.setCategories = function(categories){
+            $scope.categories = categories;
+        }
+
+        $scope.getCategory = function (cid) {
+            var category;
+            for (var i in $scope.categories) {
+                if ($scope.categories[i].id == cid) {
+                    category = $scope.categories[i];
+                    break;
+                }
+            }
+            return category;
+        }
   });
