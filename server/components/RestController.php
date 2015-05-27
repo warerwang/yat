@@ -32,7 +32,7 @@ class RestController extends Controller
     public function behaviors ()
     {
         $behaviors = parent::behaviors();
-        if (!in_array($this->action->id, $this->safeActions)) {
+        if ($this->action->id != 'options' && !in_array($this->action->id, $this->safeActions)) {
             $behaviors['authenticator'] = [
                 'class'       => CompositeAuth::className(),
                 'authMethods' => [
@@ -46,5 +46,10 @@ class RestController extends Controller
         ];
 
         return $behaviors;
+    }
+
+    public function actionOptions ()
+    {
+        return ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'];
     }
 } 

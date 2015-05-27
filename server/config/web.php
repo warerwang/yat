@@ -50,7 +50,6 @@ $config = [
                         'GET {email}'       => 'get-email',
                         'GET current'       => 'current',
                         'GET {id}/articles' => 'list',
-                        'POST'              => 'create'
                     ],
                     'tokens' => [
                         '{id}'      => '<id:\d+>',

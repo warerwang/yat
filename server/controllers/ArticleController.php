@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use app\components\RestController;
+use app\components\Tools;
 use app\models\Article;
 use app\models\Category;
 use yii\base\UserException;
@@ -64,6 +65,18 @@ class ArticleController extends RestController
      *          type="integer",
      *          description="页码"
      *      ),
+     *   ),
+     *   @SWG\Operation(
+     *      method="POST",
+     *      type="Article",
+     *      nickname="create",
+     *      notes="添加一篇文章",
+     *      @SWG\Parameter(
+     *          type="Article",
+     *          paramType="body",
+     *          required=true,
+     *          description="内容, cid, title, content这三个参数必选"
+     *      ),
      *   )
      * )
      * @return \yii\data\ActiveDataProvider
@@ -71,6 +84,7 @@ class ArticleController extends RestController
     public function actionIndex ()
     {
         $article = new Article();
+        $article->cid = \Yii::$app->request->get('cid');
         return $article->search();
     }
 
@@ -104,14 +118,22 @@ class ArticleController extends RestController
         return $model;
     }
 
+    /**
+     * @return Article
+     * @throws \yii\base\UserException
+     */
     public function actionCreate ()
     {
         $model = new Article();
         $data = json_decode(\Yii::$app->request->rawBody, true);
-        $model->cid = $data['cid'];
-        $model->title = $data['title'];
-        $model->content = $data['content'];
-        $model->save();
+        $model->load([$model->formName() => $data]);
+        if(!$model->save()){
+            if($model->errors){
+                throw new UserException(Tools::getFirstError($model));
+            }else{
+                throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
+            }
+        }
         return $model;
     }
 
