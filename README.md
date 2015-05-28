@@ -1,36 +1,39 @@
-这是一个yii2 作为restful api.
-angularjs 做前端的实验项目.
-通过nginx的反响代理解决api的跨域请求
+####这是一个yii2 作为restful api.angularjs 做前端的实验项目.通过nginx的反响代理解决api的跨域请求
 
-目录:
-client 客户端
-  dev  开发时的网站代码.
-  dist 部署时的网站代码
-  test 单元测试
-server 服务器
+##目录:
+###client 客户端
+ * dev  开发时的网站代码.
+ * dist 部署时的网站代码
+ * test 单元测试
 
-config 服务器配置
+###server 服务器
+ * modules 模块
+ * controllers 控制器
+ * models 模型
+ * dev 域名绑定目录
+ * config 服务器配置
 
-安装
-server
-composer install
-client
-npm install
+##安装
+开发环境需要一下组建 nodejs npm grunt-cli compass karma-cli ruby composer codecept
+安装命令
+```shell
+npm -g install grunt-cli compass karma-cli ruby composer codecept
+```
 
-开发环境需要 nodejs npm grunt-cli compass karma-cli ruby composer codecept
-部署
-make deploy
-
-
-grunt serve 开启测试
-
-
-初次安装.
+###安装服务端
+```shell
 cd yat/server
 make composer_prepare
 make composer_install
 make prepare
 bower install
-
+```
+###客户端
+```shell
 cd yat/client
 make prepare
+grunt serve
+```
+
+##部署
+make deploy
