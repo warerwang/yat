@@ -14,8 +14,8 @@ angular
     'ngCookies',
     'ngResource',
     'ngRoute',
-    'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'summernote'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
