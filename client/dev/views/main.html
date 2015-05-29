@@ -11,6 +11,6 @@
     <div class="article-info">
         撰写于{{article.create_time}} 发表在 <a href="/category/{{article.cid}}" title="查看 {{getCategory(article.cid).name}} 中的全部文章" rel="category tag">{{getCategory(article.cid).name}}</a>
     </div>
-    <div class="article-body" ng-bind-html="article.summary"></div>
+    <div class="article-body" ng-bind="article.summary"></div>
     <a href="/article/{{article.id}}" title="{{article.title}}" class="readmore">阅读全文 »</a>
 </div>

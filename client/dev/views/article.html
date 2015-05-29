@@ -2,5 +2,5 @@
     <div class="article-title">{{article.title}}</div>
     <div class="article-info">撰写于2013/04/25 发表在 <a ng-href="/category/{{article.cid}}" title="查看 {{getCategory(article.cid).name}} 中的全部文章" rel="category tag">{{getCategory(article.cid).name}}</a>
     </div>
-    <div class="article-body" ng-bind-html="article.content"></div>
+    <div class="article-body" ng-bind-html="article.content" high-light-content></div>
 </div>
