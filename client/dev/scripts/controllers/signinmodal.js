@@ -15,7 +15,6 @@ angular.module('webappApp')
                     AuthService.saveAccessToken(res.data.access_token);
                     AuthService.loginByAccessToken(res.data.access_token)
                         .then(function(user){
-                            console.log(user);
                             $scope.setCurrentUser(user);
                         });
                     $('#sign-in-modal').modal('hide');

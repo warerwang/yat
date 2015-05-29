@@ -13,14 +13,6 @@ angular.module('webappApp')
 
         authService.signUp = function (email, password) {
             return $http.post(API_BASE_URL + '/user', {email: email, password: password});
-            return $http.post(API_BASE_URL + '/user', {email: email, password: password})
-                .then(function (res) {
-                    Session.create(res.data.access_token);
-                    return res;
-                }, function (res) {
-                console.log(res);
-                    return res;
-                });
         };
 
         authService.loginByAccessToken = function (access_token) {
