@@ -1,5 +1,5 @@
 <div class="article shadow">
-    <select class="form-control" ng-model="chooseCategory" ng-options="category.name for category in categories"></select>
+    <select class="form-control" ng-init="chooseCategory = categories[0]" ng-model="chooseCategory" ng-options="category.name for category in categories"></select>
     <br />
     <input class="form-control" type="text" placeholder="标题" ng-model="article.title">
     <br />
