@@ -5,6 +5,7 @@
 
 angular.module('webappApp')
     .factory('UtilsService', function () {
+        var timer = {};
         var Utils = {
             DATE_FORMAT_MMDDYYY : 1,
             getLocalTime : function(UTCTime, format){
@@ -121,6 +122,15 @@ angular.module('webappApp')
                 }else{
                     return filename.substring(index + 1).toLowerCase();
                 }
+            },
+
+            rebound : function(key, callback, time){
+                if(typeof timer[key] !== 'undefined'){
+                    clearTimeout(timer[key]);
+                }
+                timer[key] = setTimeout(function(){
+                    callback()
+                } , time);
             }
         };
         return Utils;
