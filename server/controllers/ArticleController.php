@@ -139,10 +139,20 @@ class ArticleController extends RestController
 
     public function actionUpdate ($id)
     {
+        \Yii::$app->request->setQueryParams(['expand' => 'content,category']);
         $model = Article::findOne($id);
         $this->checkModel($model);
         $data = json_decode(\Yii::$app->request->rawBody, true);
-
+        $model->load([$model->formName() => $data]);
+        if($model->save()){
+            return $model;
+        }else{
+            if($model->errors){
+                throw new UserException(Tools::getFirstError($model));
+            }else{
+                throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
+            }
+        }
     }
 
     public function actionDelete ($id)

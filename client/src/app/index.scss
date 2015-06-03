@@ -25,6 +25,7 @@ body, input, textarea {
 a:hover {
   text-decoration:none;
 }
+a:link,a:visited,a:hover{ text-decoration:none; outline:none;}
 
 .contact a,.logo-wrap,.menu a,.article-title a,.readmore,.buttonDemo a,.wp-pagenavi a,.backTop,.menu ul li:hover{ -webkit-transition:all 0.3s ease-out; -moz-transition:all 0.3s ease-out; -ms-transition:all 0.3s ease-out; -o-transition:all 0.3s ease-out; transition:all 0.3s ease-out;}
 
@@ -34,7 +35,7 @@ a:hover {
 ::-moz-selection{ color:#fff; background:#80b600;}
 ::selection{ color:#fff; background:#80b600;}
 
-a:link,a:visited,a:hover{ text-decoration:none; outline:none;}
+
 .shadow{ -moz-box-shadow:0 0 3px #E9E9E9; -webkit-box-shadow:0 0 3px #E9E9E9; box-shadow:0 0 3px #E9E9E9;}
 
 .article{ padding:20px 30px; background-color:#fff;}
@@ -113,6 +114,11 @@ a:link,a:visited,a:hover{ text-decoration:none; outline:none;}
     }
   }
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
 
 /* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
    all your sass files automatically */
