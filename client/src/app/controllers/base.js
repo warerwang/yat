@@ -8,11 +8,30 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('BaseCtrl', function ($scope, AuthService, Session, $location) {
-        
+  .controller('BaseCtrl', function ($scope, AuthService, Session, $location, PRE_PAGE_COUNT, $timeout) {
+        $scope.prePageCount = PRE_PAGE_COUNT;
         $scope.currentUser = null;
         $scope.isAuthorized = AuthService.isAuthenticated();
-
+        $scope.alert = {
+            isShow : false,
+            type   : '',
+            message: ""
+        };
+        $scope.showAlert = function(type, message, time){
+            $scope.alert = {
+                isShow : true,
+                type   : type,
+                message: message
+            };
+            if(time > 0){
+                $timeout(
+                    function() {
+                        $scope.alert.isShow = false;
+                    },
+                    time
+                );
+            }
+        };
         if($scope.isAuthorized){
             AuthService.loginByAccessToken(Session.access_token)
                 .then(function (user) {

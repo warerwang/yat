@@ -64,6 +64,10 @@
       </div>
       <div class="row">
           <div class="col-sm-9 col-xs-12">
+              <div class="alert alert-{{alert.type}} alert-dismissible fade in" role="alert" ng-show="alert.isShow">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  {{alert.message}}
+              </div>
               <ol class="breadcrumb" ng-if="breadcrumbs">
                   <li ng-repeat="breadcrumb in breadcrumbs"><a ng-href="{{breadcrumb.href}}">{{breadcrumb.name}}</a></li>
               </ol>
@@ -85,6 +89,7 @@
       </div>
   </div>
   <div ng-include src="'app/views/signModal.html'"></div>
+  <div ng-include src="'app/views/commonModal.html'"></div>
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->

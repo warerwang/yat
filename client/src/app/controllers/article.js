@@ -8,7 +8,7 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('ArticleCtrl', function ($scope, $http, $routeParams, $rootScope, CategoryServ, ArticleServ, $sce) {
+  .controller('ArticleCtrl', function ($scope, $http, $routeParams, $rootScope, CategoryServ, ArticleServ, $sce, UtilsService, $location) {
 
         var id = $routeParams.id;
         ArticleServ.get({aid:id}, function(article) {
@@ -22,7 +22,16 @@ angular.module('webappApp')
         $scope.edit = function(){
             $scope.isEditMode = true;
             $scope.chooseCategory = $scope.getCategory($scope.article.cid);
-        }
+        };
+
+        $scope.delete = function(){
+            UtilsService.confirm("确定要删除这篇文章么?", function(){
+                $scope.article.$delete({aid:id}, function(res){
+                    $location.path("/");
+                });
+            });
+
+        };
 
         $scope.submitEdit = function(){
             $scope.isEditMode = false;
@@ -32,7 +41,7 @@ angular.module('webappApp')
                 $scope.article.trustContent = $sce.trustAsHtml(article.content);
                 $scope.$broadcast('dataloaded');
             });
-        }
+        };
 
         function setBreadcrumbs(article){
             $rootScope.breadcrumbs = [

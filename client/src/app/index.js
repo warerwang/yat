@@ -19,11 +19,11 @@ angular
     ])
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider
-            .when('/', {
+            .when('/:page?', {
                 templateUrl: 'app/views/main.html',
                 controller: 'MainCtrl'
             })
-            .when('/category/:id', {
+            .when('/category/:id/:page?', {
                 templateUrl: 'app/views/main.html',
                 controller: 'CategoryCtrl'
             })
@@ -40,4 +40,5 @@ angular
             });
         $locationProvider.html5Mode(true);
     })
-    .constant('API_BASE_URL', 'http://api.yat.com');
+    .constant('API_BASE_URL', 'http://api.yat.com')
+    .constant('PRE_PAGE_COUNT', 10);

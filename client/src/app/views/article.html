@@ -1,5 +1,5 @@
 <div class="article shadow" ng-hide="isEditMode">
-    <div class="article-title">{{article.title}} <i class="fa fa-edit cursor-pointer" ng-click="edit()"></i> </div>
+    <div class="article-title">{{article.title}} <i class="fa fa-edit cursor-pointer" ng-click="edit()" ng-show="isAuthorized"></i> <i class="fa fa-trash cursor-pointer" ng-click="delete()" ng-show="isAuthorized"></i></div>
     <div class="article-info">
         撰写于 {{article.create_time}} 发表在 <a ng-href="/category/{{article.cid}}" title="查看 {{getCategory(article.cid).name}} 中的全部文章" rel="category tag">{{getCategory(article.cid).name}}</a>
     </div>

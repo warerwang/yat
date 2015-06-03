@@ -39,12 +39,9 @@ class ArticleController extends RestController
 
     public function init ()
     {
-        $this->errorMessage = array_merge(
-            [
-                self::ARTICLE_IS_NOT_EXIST => '文章不存在'
-            ]
-            , $this->errorMessage
-        );
+        $this->errorMessage += [
+            self::ARTICLE_IS_NOT_EXIST => '文章不存在'
+        ];
     }
 
     public $safeActions = ['index', 'view'];
