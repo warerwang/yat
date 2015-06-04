@@ -44,5 +44,5 @@ angular
             });
         $locationProvider.html5Mode(true);
     })
-    .constant('API_BASE_URL', 'http://api.yat.com')
+    .constant('API_BASE_URL', 'http://api.warphp.com')
     .constant('PRE_PAGE_COUNT', 10);

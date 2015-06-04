@@ -1,5 +1,5 @@
 deploy:
-	grunt build
+	gulp build
 	tar czf client_upload.tar.gz dist
 	scp client_upload.tar.gz root@blog.warphp.com:/www/webroot/yat/client
 	rm client_upload.tar.gz
@@ -9,4 +9,4 @@ prepare:
 	bower install
 
 start:
-	grunt serve
+	gulp serve
