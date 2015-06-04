@@ -24,6 +24,20 @@
                         }
                     ],
                     "notes": "\u5f97\u5230\u5206\u7c7b\u5217\u8868"
+                },
+                {
+                    "method": "POST",
+                    "nickname": "create",
+                    "type": "Category",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "Category",
+                            "required": true,
+                            "description": "\u5185\u5bb9"
+                        }
+                    ],
+                    "notes": "\u6dfb\u52a0\u4e00\u4e2a\u5206\u7c7b"
                 }
             ]
         },
@@ -45,20 +59,11 @@
                         }
                     ],
                     "notes": "\u67e5\u8be2\u6307\u5b9a\u5206\u7c7b"
-                }
-            ]
-        },
-        {
-            "path": "/category/{id}/articles",
-            "description": "\u67e5\u8be2\u6307\u5b9a\u5206\u7c7b\u4e0b\u7684\u6587\u4ef6\u5217\u8868",
-            "operations": [
+                },
                 {
-                    "method": "GET",
-                    "nickname": "list",
-                    "type": "array",
-                    "items": {
-                        "$ref": "Article"
-                    },
+                    "method": "PUT",
+                    "nickname": "create",
+                    "type": "Category",
                     "parameters": [
                         {
                             "paramType": "path",
@@ -68,14 +73,28 @@
                             "description": "\u5206\u7c7bid"
                         },
                         {
-                            "paramType": "query",
-                            "name": "page",
-                            "type": "integer",
-                            "required": false,
-                            "description": "\u9875\u7801"
+                            "paramType": "body",
+                            "type": "Category",
+                            "required": true,
+                            "description": "\u5185\u5bb9"
                         }
                     ],
-                    "notes": "\u67e5\u8be2\u6307\u5b9a\u5206\u7c7b\u7684\u6587\u4ef6\u5217\u8868"
+                    "notes": "\u4fee\u6539\u6307\u5b9a\u5206\u7c7b"
+                },
+                {
+                    "method": "DELETE",
+                    "nickname": "delete",
+                    "type": "boolean",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u5206\u7c7bid"
+                        }
+                    ],
+                    "notes": "\u5220\u9664\u4e00\u4e2a\u5206\u7c7b"
                 }
             ]
         }
@@ -99,33 +118,6 @@
                 },
                 "sort": {
                     "type": "integer"
-                }
-            }
-        },
-        "Article": {
-            "id": "Article",
-            "description": "\u6587\u7ae0\u6a21\u578b",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "cid": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "content": {
-                    "type": "string"
-                },
-                "summary": {
-                    "type": "string"
-                },
-                "create_time": {
-                    "type": "string"
-                },
-                "last_modify": {
-                    "type": "string"
                 }
             }
         }

@@ -85,6 +85,26 @@ class ArticleController extends RestController
         return $article->search();
     }
 
+
+    /**
+     * @return Article
+     * @throws \yii\base\UserException
+     */
+    public function actionCreate ()
+    {
+        $model = new Article();
+        $data = json_decode(\Yii::$app->request->rawBody, true);
+        $model->load([$model->formName() => $data]);
+        if(!$model->save()){
+            if($model->errors){
+                throw new UserException(Tools::getFirstError($model));
+            }else{
+                throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
+            }
+        }
+        return $model;
+    }
+
     /**
      *   @SWG\Api(
      *   path="/article/{id}",
@@ -94,6 +114,37 @@ class ArticleController extends RestController
      *      type="Article",
      *      nickname="view",
      *      notes="得到文章的详细信息",
+     *      @SWG\Parameter(
+     *          name="id",
+     *          paramType="path",
+     *          required=true,
+     *          type="string",
+     *          description="文章id"
+     *      ),
+     *   ),
+     *   @SWG\Operation(
+     *      method="PUT",
+     *      type="Article",
+     *      nickname="create",
+     *      notes="修改一篇文章",
+     *      @SWG\Parameter(
+     *          name="id",
+     *          paramType="path",
+     *          required=true,
+     *          type="string",
+     *          description="文章id"
+     *      ),
+     *      @SWG\Parameter(
+     *          paramType="body",
+     *          required=true,
+     *          description="内容, cid, title, content"
+     *      ),
+     *   ),
+     *   @SWG\Operation(
+     *      method="DELETE",
+     *      type="boolean",
+     *      nickname="delete",
+     *      notes="删除一篇文章",
      *      @SWG\Parameter(
      *          name="id",
      *          paramType="path",
@@ -112,25 +163,6 @@ class ArticleController extends RestController
         \Yii::$app->request->setQueryParams(['expand' => 'content,category']);
         $model = Article::findOne($id);
         $this->checkModel($model);
-        return $model;
-    }
-
-    /**
-     * @return Article
-     * @throws \yii\base\UserException
-     */
-    public function actionCreate ()
-    {
-        $model = new Article();
-        $data = json_decode(\Yii::$app->request->rawBody, true);
-        $model->load([$model->formName() => $data]);
-        if(!$model->save()){
-            if($model->errors){
-                throw new UserException(Tools::getFirstError($model));
-            }else{
-                throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
-            }
-        }
         return $model;
     }
 

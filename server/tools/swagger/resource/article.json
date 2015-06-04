@@ -59,6 +59,41 @@
                         }
                     ],
                     "notes": "\u5f97\u5230\u6587\u7ae0\u7684\u8be6\u7ec6\u4fe1\u606f"
+                },
+                {
+                    "method": "PUT",
+                    "nickname": "create",
+                    "type": "Article",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u6587\u7ae0id"
+                        },
+                        {
+                            "paramType": "body",
+                            "required": true,
+                            "description": "\u5185\u5bb9, cid, title, content"
+                        }
+                    ],
+                    "notes": "\u4fee\u6539\u4e00\u7bc7\u6587\u7ae0"
+                },
+                {
+                    "method": "DELETE",
+                    "nickname": "delete",
+                    "type": "boolean",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u6587\u7ae0id"
+                        }
+                    ],
+                    "notes": "\u5220\u9664\u4e00\u7bc7\u6587\u7ae0"
                 }
             ]
         }
