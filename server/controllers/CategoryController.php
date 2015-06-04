@@ -9,7 +9,8 @@
 namespace app\controllers;
 
 use app\components\RestController;
-use app\models\Article;
+use app\components\Tools;
+use app\exceptions\UserException;
 use app\models\Category;
 use yii\web\NotFoundHttpException;
 
@@ -32,6 +33,7 @@ use yii\web\NotFoundHttpException;
  */
 class CategoryController extends RestController
 {
+    public $safeActions = ['index', 'view', 'list'];
     /**
      * @SWG\Api(
      *   path="/category",
@@ -50,12 +52,39 @@ class CategoryController extends RestController
      *          description="页码"
      *      ),
      *   ),
+     *   @SWG\Operation(
+     *      method="POST",
+     *      type="Category",
+     *      nickname="create",
+     *      notes="添加一个分类",
+     *      @SWG\Parameter(
+     *          type="Category",
+     *          paramType="body",
+     *          required=true,
+     *          description="内容"
+     *      ),
+     *   )
      * )
      */
     public function actionIndex ()
     {
         $category= new Category();
         return $category->search(\Yii::$app->request->get());
+    }
+
+    public function actionCreate ()
+    {
+        $model = new Category();
+        $data = json_decode(\Yii::$app->request->rawBody, true);
+        $model->load([$model->formName() => $data]);
+        if(!$model->save()){
+            if($model->errors){
+                throw new UserException(Tools::getFirstError($model));
+            }else{
+                throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
+            }
+        }
+        return $model;
     }
 
     /**
@@ -75,24 +104,11 @@ class CategoryController extends RestController
      *          description="分类id"
      *      ),
      *   ),
-     * )
-     */
-    public function actionView ($id)
-    {
-        $category = $this->findModel($id);
-        return $category;
-    }
-
-    /**
-     * @SWG\Api(
-     *   path="/category/{id}/articles",
-     *   description="查询指定分类下的文件列表",
      *   @SWG\Operation(
-     *      method="GET",
-     *      type="array",
-     *      @SWG\Items("Article"),
-     *      nickname="list",
-     *      notes="查询指定分类的文件列表",
+     *      method="PUT",
+     *      type="Category",
+     *      nickname="create",
+     *      notes="修改指定分类",
      *      @SWG\Parameter(
      *          name="id",
      *          paramType="path",
@@ -101,21 +117,58 @@ class CategoryController extends RestController
      *          description="分类id"
      *      ),
      *      @SWG\Parameter(
-     *          name="page",
-     *          paramType="query",
-     *          required=false,
-     *          type="integer",
-     *          description="页码"
+     *          type="Category",
+     *          paramType="body",
+     *          required=true,
+     *          description="内容"
      *      ),
      *   ),
+     *   @SWG\Operation(
+     *      method="DELETE",
+     *      type="boolean",
+     *      nickname="delete",
+     *      notes="删除一个分类",
+     *      @SWG\Parameter(
+     *          name="id",
+     *          paramType="path",
+     *          required=true,
+     *          type="string",
+     *          description="分类id"
+     *      ),
+     *   )
      * )
      */
-    public function actionList ($id)
+    public function actionView ($id)
     {
         $category = $this->findModel($id);
-        $article = new Article();
-        $article->cid = $category->id;
-        return $article->search();
+        return $category;
+    }
+
+
+    public function actionUpdate ($id)
+    {
+        $model = $this->findModel($id);
+        $data = json_decode(\Yii::$app->request->rawBody, true);
+        $model->load([$model->formName() => $data]);
+        if($model->save()){
+            return $model;
+        }else{
+            if($model->errors){
+                throw new UserException(Tools::getFirstError($model));
+            }else{
+                throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
+            }
+        }
+    }
+
+    public function actionDelete ($id)
+    {
+        $model = $this->findModel($id);
+        if($model->delete()){
+            return true;
+        }else{
+            throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
+        }
     }
 
     protected function findModel($id)

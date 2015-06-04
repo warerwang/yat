@@ -33,15 +33,12 @@ class UsersBase extends Model
     public function rules()
     {
         return [
-            [['id', 'email', 'password', 'salt', 'nickname'], 'required'],
-            [['group_id'], 'integer'],
-            [['create_time', 'last_activity'], 'safe'],
-            [['id'], 'string', 'max' => 20],
+            [['email', 'password'], 'required'],
+//            [['group_id'], 'integer'],
             [['email'], 'string', 'max' => 255],
-            [['password', 'access_token'], 'string', 'max' => 32],
-            [['salt'], 'string', 'max' => 8],
+            [['password'], 'string', 'max' => 32],
             [['nickname'], 'string', 'max' => 50],
-            [['access_token'], 'unique']
+            [['email', 'access_token'], 'unique']
         ];
     }
 

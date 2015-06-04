@@ -9,6 +9,10 @@
         {
             "path": "/category.{format}",
             "description": "category api"
+        },
+        {
+            "path": "/user.{format}",
+            "description": "user api"
         }
     ]
 }

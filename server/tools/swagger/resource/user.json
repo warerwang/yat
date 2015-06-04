@@ -1,0 +1,154 @@
+{
+    "basePath": "/",
+    "swaggerVersion": "1.2",
+    "resourcePath": "/user",
+    "apis": [
+        {
+            "path": "/user",
+            "description": "\u7528\u6237\u4fe1\u606f\u76f8\u5173\u63a5\u53e3",
+            "operations": [
+                {
+                    "method": "POST",
+                    "nickname": "create",
+                    "type": "User",
+                    "parameters": [
+                        {
+                            "paramType": "form",
+                            "name": "email",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u7528\u6237email"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "password",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u7528\u6237\u5bc6\u7801"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "nickname",
+                            "type": "string",
+                            "required": false,
+                            "description": "\u7528\u6237\u6635\u79f0"
+                        }
+                    ],
+                    "notes": "\u6ce8\u518c\u7528\u6237"
+                }
+            ]
+        },
+        {
+            "path": "/user/access-token",
+            "description": "Access-token\u76f8\u5173\u63a5\u53e3",
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "create",
+                    "type": "User",
+                    "parameters": [
+                        {
+                            "paramType": "query",
+                            "name": "email",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u7528\u6237email"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "password",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u7528\u6237\u5bc6\u7801"
+                        }
+                    ],
+                    "notes": "\u7528\u6237\u767b\u9646"
+                }
+            ]
+        },
+        {
+            "path": "/user/current",
+            "description": "\u5f53\u524d\u7528\u6237\u76f8\u5173\u63a5\u53e3",
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "current",
+                    "type": "User",
+                    "notes": "\u7528\u6237\u767b\u9646"
+                }
+            ]
+        },
+        {
+            "path": "/user/{id}",
+            "description": "\u7528\u6237\u4fe1\u606f\u76f8\u5173\u63a5\u53e3",
+            "operations": [
+                {
+                    "method": "GET",
+                    "nickname": "view",
+                    "type": "User",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u7528\u6237id"
+                        }
+                    ],
+                    "notes": "\u67e5\u8be2\u7528\u6237\u4fe1\u606f"
+                },
+                {
+                    "method": "PUT",
+                    "nickname": "update",
+                    "type": "User",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u7528\u6237id\u6216\u8005email"
+                        },
+                        {
+                            "paramType": "form",
+                            "name": "nickname",
+                            "type": "string",
+                            "required": false,
+                            "description": "\u7528\u6237\u6635\u79f0"
+                        }
+                    ],
+                    "notes": "\u66f4\u65b0\u7528\u6237\u4fe1\u606f"
+                }
+            ]
+        }
+    ],
+    "models": {
+        "User": {
+            "id": "User",
+            "description": "\u7528\u6237\u6a21\u578b",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "group_id": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "access_token": {
+                    "type": "string"
+                },
+                "create_time": {
+                    "type": "string"
+                },
+                "last_activity": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

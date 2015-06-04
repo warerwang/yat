@@ -30,10 +30,9 @@ class ArticleBase extends Model
     public function rules()
     {
         return [
-            [['id', 'cid', 'title', 'content'], 'required'],
+            [['cid', 'title', 'content'], 'required'],
             [['content'], 'string'],
-            [['create_time', 'last_modify'], 'safe'],
-            [['id', 'cid'], 'string', 'max' => 20],
+            [['cid'], 'string', 'max' => 20],
             [['title'], 'string', 'max' => 255]
         ];
     }

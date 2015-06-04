@@ -1,0 +1,17 @@
+<div class="article shadow" ng-hide="isEditMode">
+    <div class="article-title">{{article.title}} <i class="fa fa-edit cursor-pointer" ng-click="edit()" ng-show="isAuthorized"></i> <i class="fa fa-trash cursor-pointer" ng-click="delete()" ng-show="isAuthorized"></i></div>
+    <div class="article-info">
+        撰写于 {{article.create_time}} 发表在 <a ng-href="/category/{{article.cid}}" title="查看 {{getCategory(article.cid).name}} 中的全部文章" rel="category tag">{{getCategory(article.cid).name}}</a>
+    </div>
+    <div class="article-body" ng-bind-html="article.trustContent" high-light-content></div>
+</div>
+<div class="article shadow" ng-show="isEditMode">
+    <select class="form-control" ng-model="chooseCategory" ng-options="category.name for category in categories"></select>
+    <br />
+    <input class="form-control" type="text" placeholder="标题" ng-model="article.title">
+    <br />
+    <summernote class="form-control" rows="3" height="300" name="content" ng-model="article.content"></summernote>
+    <br />
+    <button class="btn btn-primary pull-right" ng-click="submitEdit()">修改</button>
+    <br />
+</div>

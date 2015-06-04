@@ -17,6 +17,20 @@
                     "parameters": [
                         {
                             "paramType": "query",
+                            "name": "cid",
+                            "type": "string",
+                            "required": false,
+                            "description": "\u5206\u7c7bid"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "keyword",
+                            "type": "string",
+                            "required": false,
+                            "description": "\u5173\u952e\u8bcd"
+                        },
+                        {
+                            "paramType": "query",
                             "name": "page",
                             "type": "integer",
                             "required": false,
@@ -24,6 +38,20 @@
                         }
                     ],
                     "notes": "\u5f97\u5230\u6240\u6709\u6587\u7ae0\u5217\u8868"
+                },
+                {
+                    "method": "POST",
+                    "nickname": "create",
+                    "type": "Article",
+                    "parameters": [
+                        {
+                            "paramType": "body",
+                            "type": "Article",
+                            "required": true,
+                            "description": "\u5185\u5bb9, cid, title, content\u8fd9\u4e09\u4e2a\u53c2\u6570\u5fc5\u9009"
+                        }
+                    ],
+                    "notes": "\u6dfb\u52a0\u4e00\u7bc7\u6587\u7ae0"
                 }
             ]
         },
@@ -45,6 +73,41 @@
                         }
                     ],
                     "notes": "\u5f97\u5230\u6587\u7ae0\u7684\u8be6\u7ec6\u4fe1\u606f"
+                },
+                {
+                    "method": "PUT",
+                    "nickname": "create",
+                    "type": "Article",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u6587\u7ae0id"
+                        },
+                        {
+                            "paramType": "body",
+                            "required": true,
+                            "description": "\u5185\u5bb9, cid, title, content"
+                        }
+                    ],
+                    "notes": "\u4fee\u6539\u4e00\u7bc7\u6587\u7ae0"
+                },
+                {
+                    "method": "DELETE",
+                    "nickname": "delete",
+                    "type": "boolean",
+                    "parameters": [
+                        {
+                            "paramType": "path",
+                            "name": "id",
+                            "type": "string",
+                            "required": true,
+                            "description": "\u6587\u7ae0id"
+                        }
+                    ],
+                    "notes": "\u5220\u9664\u4e00\u7bc7\u6587\u7ae0"
                 }
             ]
         }

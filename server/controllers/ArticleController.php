@@ -9,8 +9,11 @@
 namespace app\controllers;
 
 use app\components\RestController;
+use app\components\Tools;
 use app\models\Article;
 use app\models\Category;
+use yii\base\UserException;
+use yii\web\NotFoundHttpException;
 
 /**
  *
@@ -32,7 +35,16 @@ use app\models\Category;
  */
 class ArticleController extends RestController
 {
+    const ARTICLE_IS_NOT_EXIST = 200001;
 
+    public function init ()
+    {
+        $this->errorMessage += [
+            self::ARTICLE_IS_NOT_EXIST => '文章不存在'
+        ];
+    }
+
+    public $safeActions = ['index', 'view'];
     /**
      * @SWG\Api(
      *   path="/article",
@@ -44,11 +56,37 @@ class ArticleController extends RestController
      *      nickname="list",
      *      notes="得到所有文章列表",
      *      @SWG\Parameter(
+     *          name="cid",
+     *          paramType="query",
+     *          required=false,
+     *          type="string",
+     *          description="分类id"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="keyword",
+     *          paramType="query",
+     *          required=false,
+     *          type="string",
+     *          description="关键词"
+     *      ),
+     *      @SWG\Parameter(
      *          name="page",
      *          paramType="query",
      *          required=false,
      *          type="integer",
      *          description="页码"
+     *      ),
+     *   ),
+     *   @SWG\Operation(
+     *      method="POST",
+     *      type="Article",
+     *      nickname="create",
+     *      notes="添加一篇文章",
+     *      @SWG\Parameter(
+     *          type="Article",
+     *          paramType="body",
+     *          required=true,
+     *          description="内容, cid, title, content这三个参数必选"
      *      ),
      *   )
      * )
@@ -57,7 +95,29 @@ class ArticleController extends RestController
     public function actionIndex ()
     {
         $article = new Article();
+        $article->cid = \Yii::$app->request->get('cid');
+        $article->title = \Yii::$app->request->get('keyword');
         return $article->search();
+    }
+
+
+    /**
+     * @return Article
+     * @throws \yii\base\UserException
+     */
+    public function actionCreate ()
+    {
+        $model = new Article();
+        $data = json_decode(\Yii::$app->request->rawBody, true);
+        $model->load([$model->formName() => $data]);
+        if(!$model->save()){
+            if($model->errors){
+                throw new UserException(Tools::getFirstError($model));
+            }else{
+                throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
+            }
+        }
+        return $model;
     }
 
     /**
@@ -76,6 +136,37 @@ class ArticleController extends RestController
      *          type="string",
      *          description="文章id"
      *      ),
+     *   ),
+     *   @SWG\Operation(
+     *      method="PUT",
+     *      type="Article",
+     *      nickname="create",
+     *      notes="修改一篇文章",
+     *      @SWG\Parameter(
+     *          name="id",
+     *          paramType="path",
+     *          required=true,
+     *          type="string",
+     *          description="文章id"
+     *      ),
+     *      @SWG\Parameter(
+     *          paramType="body",
+     *          required=true,
+     *          description="内容, cid, title, content"
+     *      ),
+     *   ),
+     *   @SWG\Operation(
+     *      method="DELETE",
+     *      type="boolean",
+     *      nickname="delete",
+     *      notes="删除一篇文章",
+     *      @SWG\Parameter(
+     *          name="id",
+     *          paramType="path",
+     *          required=true,
+     *          type="string",
+     *          description="文章id"
+     *      ),
      *   )
      * )
      * @param $id
@@ -85,8 +176,44 @@ class ArticleController extends RestController
     public function actionView ($id)
     {
         \Yii::$app->request->setQueryParams(['expand' => 'content,category']);
-        return Article::findOne($id);
+        $model = Article::findOne($id);
+        $this->checkModel($model);
+        return $model;
     }
 
+    public function actionUpdate ($id)
+    {
+        \Yii::$app->request->setQueryParams(['expand' => 'content,category']);
+        $model = Article::findOne($id);
+        $this->checkModel($model);
+        $data = json_decode(\Yii::$app->request->rawBody, true);
+        $model->load([$model->formName() => $data]);
+        if($model->save()){
+            return $model;
+        }else{
+            if($model->errors){
+                throw new UserException(Tools::getFirstError($model));
+            }else{
+                throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
+            }
+        }
+    }
 
+    public function actionDelete ($id)
+    {
+        $model = Article::findOne($id);
+        $this->checkModel($model);
+        if($model->delete()){
+            return true;
+        }else{
+            throw new UserException($this->errorMessage[self::DB_ERROR], self::DB_ERROR);
+        }
+    }
+
+    public function checkModel($model)
+    {
+        if(empty($model)) {
+            throw new NotFoundHttpException($this->errorMessage[self::ARTICLE_IS_NOT_EXIST], self::ARTICLE_IS_NOT_EXIST);
+        }
+    }
 } 

@@ -1,0 +1,10 @@
+<div class="article shadow">
+    <select class="form-control" ng-init="chooseCategory = categories[0]" ng-model="chooseCategory" ng-options="category.name for category in categories"></select>
+    <br />
+    <input class="form-control" type="text" placeholder="标题" ng-model="article.title">
+    <br />
+    <summernote class="form-control" rows="3" height="300" name="content" ng-model="article.content"></summernote>
+    <br />
+    <button class="btn btn-primary pull-right" ng-click="post()">发布</button>
+    <br />
+</div>

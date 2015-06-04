@@ -76,7 +76,7 @@ class Article extends ArticleBase
         $query = self::find();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query'      => $query,
             'sort'       => [
                 'attributes'   => [
                     'last_modify',
@@ -84,15 +84,15 @@ class Article extends ArticleBase
                 'defaultOrder' => [
                     'last_modify' => SORT_DESC
                 ]
-            ]
+            ],
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         if(!$this->load($params) && $this->validate()){
             return $dataProvider;
         }
-//        if (!$this->validate()) {
-//            return $dataProvider;
-//        }
 
         $query->andFilterWhere(['cid' => $this->cid]);
         $query->andFilterWhere(['like', 'title', $this->title]);

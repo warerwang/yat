@@ -1,0 +1,25 @@
+<div class="row" ng-show="isAuthorized">
+    <div class="col-xs-12">
+        <a href="/article/post" class="btn btn-primary pull-right">发布文章</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-9 col-xs-12" ng-show="showKeyword">搜索的关键词是: {{keyword}}</div>
+</div>
+<br />
+<div class="article-list shadow" ng-repeat="article in articles">
+    <div class="article-title">
+        <a ng-href="/article/{{article.id}}" title="{{article.title}}">{{article.title}}</a> <i class="fa fa-trash cursor-pointer" ng-click="delete($index)" ng-show="isAuthorized"></i>
+    </div>
+    <div class="article-info">
+        撰写于{{article.create_time}} 发表在 <a href="/category/{{article.cid}}" title="查看 {{getCategory(article.cid).name}} 中的全部文章" rel="category tag">{{getCategory(article.cid).name}}</a>
+    </div>
+    <div class="article-body" ng-bind="article.summary"></div>
+    <a href="/article/{{article.id}}" title="{{article.title}}" class="readmore">阅读全文 »</a>
+</div>
+<nav>
+    <ul class="pager">
+        <li><a class="btn btn-default" href="#" ng-disabled="{{page <= 1}}" ng-click="previousPage()">上一页</a></li>
+        <li><a class="btn btn-default" href="#" ng-disabled="disableNextBtn()" ng-click="nextPage()">下一页</a></li>
+    </ul>
+</nav>

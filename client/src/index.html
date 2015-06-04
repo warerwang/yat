@@ -1,0 +1,111 @@
+<!doctype html>
+<html ng-app="webappApp">
+  <head>
+    <meta charset="utf-8">
+    <title>webappApp</title>
+    <base href="/">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <link rel="stylesheet" href="app/vendor.css">
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+  </head>
+  <body ng-app="webappApp" ng-controller="BaseCtrl">
+  <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <!-- Add your site or application content here -->
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-xs-12">
+              <div class="header">
+                  <nav class="navbar navbar-default" role="navigation">
+                      <div class="container-fluid">
+                          <!-- Brand and toggle get grouped for better mobile display -->
+                          <div class="navbar-header">
+                              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                  <span class="sr-only">Toggle navigation</span>
+                                  <span class="icon-bar"></span>
+                                  <span class="icon-bar"></span>
+                                  <span class="icon-bar"></span>
+                              </button>
+                              <a class="navbar-brand" href="/">阿东是我的博客</a>
+                          </div>
+
+                          <!-- Collect the nav links, forms, and other content for toggling -->
+                          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                              <ul class="nav navbar-nav navbar-right">
+                                  <li><a ng-href="#" ng-hide="isAuthorized" ng-click="showSignModal()">登陆</a></li>
+                                  <!--<li><a ng-href="#" ng-hide="isAuthorized" ng-click="showSignUpModal()">注册</a></li>-->
+                                  <li><a ng-href="#" ng-show="isAuthorized" ng-click="signOut()"><span ng-bind="currentUser.email"></span> 退出</a></li>
+                              </ul>
+                              <form class="navbar-form navbar-right" role="search">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" placeholder="输入关键字" ng-model="keyword" ng-keydown="search()"/>
+                                  </div>
+                              </form>
+                          </div><!-- /.navbar-collapse -->
+                      </div><!-- /.container-fluid -->
+                  </nav>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-9 col-xs-12">
+              <div class="alert alert-{{alert.type}} alert-dismissible fade in" role="alert" ng-show="alert.isShow">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  {{alert.message}}
+              </div>
+              <ol class="breadcrumb" ng-if="breadcrumbs">
+                  <li ng-repeat="breadcrumb in breadcrumbs"><a ng-href="{{breadcrumb.href}}">{{breadcrumb.name}}</a></li>
+              </ol>
+              <div ng-view></div>
+          </div>
+          <div class="col-sm-3 hidden-xs right-bar" ng-controller="RightsideCtrl">
+              <div class="panel panel-info">
+                  <!-- Default panel contents -->
+                  <div class="panel-heading">分类</div>
+                  <!-- List group -->
+                  <ul class="list-group">
+                      <a class="list-group-item" ng-class="{'active':isActive('/category/{{category.id}}')}" ng-repeat="category in categories" ng-href="/category/{{category.id}}">{{category.name}}</a>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div class="footer">
+          <p><span class="glyphicon glyphicon-heart"></span> from the warphp team</p>
+      </div>
+  </div>
+  <div ng-include src="'app/views/signModal.html'"></div>
+  <div ng-include src="'app/views/commonModal.html'"></div>
+
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+    <!-- inject:js -->
+    <!-- js files will be automatically insert here -->
+    <!-- endinject -->
+
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+  </body>
+</html>
