@@ -82,6 +82,10 @@
                       <a class="list-group-item" ng-class="{'active':isActive('/category/{{category.id}}')}" ng-repeat="category in categories" ng-href="/category/{{category.id}}">{{category.name}}</a>
                   </ul>
               </div>
+
+              <div class="panel panel-info">
+                  <iframe id="sina_widget_1900291615" style="width:100%; height:500px;" frameborder="0" scrolling="no" src="http://v.t.sina.com.cn/widget/widget_blog.php?uid=1900291615&height=500&skin=wd_04&showpic=1"></iframe>
+              </div>
           </div>
       </div>
       <div class="footer">
@@ -90,6 +94,8 @@
   </div>
   <div ng-include src="'app/views/signModal.html'"></div>
   <div ng-include src="'app/views/commonModal.html'"></div>
+  <a href="https://github.com/warerwang/yat" target="_blank"><img src="assets/images/fork-me.png" style="top:0;right:0;position:absolute;"></a>
+
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
