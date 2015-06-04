@@ -8,11 +8,12 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('MainCtrl', function ($scope,$rootScope, $http, ArticleServ, $location, $routeParams, UtilsService) {
+  .controller('ArticleSearchCtrl', function ($scope,$rootScope, $http, ArticleServ, $location, $routeParams, UtilsService) {
     $rootScope.breadcrumbs = false;
-    var page = $scope.page = $routeParams.page ? $routeParams.page * 1 : 1;
-
-    ArticleServ.query({page:page},function(articles){
+    var page = $scope.page = $routeParams.page ? $routeParams.page * 1 : 1,
+        keyword = $scope.keyword = $routeParams.keyword ? $routeParams.keyword : '';
+    $scope.showKeyword = true;
+    ArticleServ.query({page:page, keyword:keyword},function(articles){
         $scope.articles = articles;
 
         $scope.articleCount = articles.length;
@@ -20,11 +21,11 @@ angular.module('webappApp')
     });
 
     $scope.previousPage = function(){
-        $location.path("/" + (--page));
+        $location.path("/search/" + $scope.keyword + "/" + (--page));
     };
 
     $scope.nextPage = function(){
-        $location.path("/" + (++page));
+        $location.path("/search/" + $scope.keyword + "/" + (++page));
     };
 
     $scope.delete = function(index){
@@ -36,6 +37,7 @@ angular.module('webappApp')
             });
         });
     };
+
     $scope.disableNextBtn = function() {
         return $scope.itemCount != $scope.prePageCount;
     };

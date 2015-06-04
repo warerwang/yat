@@ -17,6 +17,20 @@
                     "parameters": [
                         {
                             "paramType": "query",
+                            "name": "cid",
+                            "type": "string",
+                            "required": false,
+                            "description": "\u5206\u7c7bid"
+                        },
+                        {
+                            "paramType": "query",
+                            "name": "keyword",
+                            "type": "string",
+                            "required": false,
+                            "description": "\u5173\u952e\u8bcd"
+                        },
+                        {
+                            "paramType": "query",
                             "name": "page",
                             "type": "integer",
                             "required": false,

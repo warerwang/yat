@@ -56,6 +56,20 @@ class ArticleController extends RestController
      *      nickname="list",
      *      notes="得到所有文章列表",
      *      @SWG\Parameter(
+     *          name="cid",
+     *          paramType="query",
+     *          required=false,
+     *          type="string",
+     *          description="分类id"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="keyword",
+     *          paramType="query",
+     *          required=false,
+     *          type="string",
+     *          description="关键词"
+     *      ),
+     *      @SWG\Parameter(
      *          name="page",
      *          paramType="query",
      *          required=false,
@@ -82,6 +96,7 @@ class ArticleController extends RestController
     {
         $article = new Article();
         $article->cid = \Yii::$app->request->get('cid');
+        $article->title = \Yii::$app->request->get('keyword');
         return $article->search();
     }
 

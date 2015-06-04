@@ -38,4 +38,8 @@ angular.module('webappApp')
                 });
             });
         };
+
+        $scope.disableNextBtn = function() {
+            return $scope.itemCount != $scope.prePageCount;
+        };
   });

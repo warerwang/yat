@@ -3,6 +3,9 @@
         <a href="/article/post" class="btn btn-primary pull-right">发布文章</a>
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-9 col-xs-12" ng-show="showKeyword">搜索的关键词是: {{keyword}}</div>
+</div>
 <br />
 <div class="article-list shadow" ng-repeat="article in articles">
     <div class="article-title">
@@ -16,7 +19,7 @@
 </div>
 <nav>
     <ul class="pager">
-        <li><a class="btn btn-default" href="#" ng-disabled="{{page <= 1}}" ng-click="previousPage()">上一页 {{page - 1}}</a></li>
-        <li><a class="btn btn-default" href="#" ng-disabled="{{itemCount != prePageCount}}" ng-click="nextPage()">下一页 {{page + 1}}</a></li>
+        <li><a class="btn btn-default" href="#" ng-disabled="{{page <= 1}}" ng-click="previousPage()">上一页</a></li>
+        <li><a class="btn btn-default" href="#" ng-disabled="disableNextBtn()" ng-click="nextPage()">下一页</a></li>
     </ul>
 </nav>

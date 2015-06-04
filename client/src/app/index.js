@@ -23,6 +23,10 @@ angular
                 templateUrl: 'app/views/main.html',
                 controller: 'MainCtrl'
             })
+            .when('/search/:keyword/:page?', {
+                templateUrl: 'app/views/main.html',
+                controller: 'ArticleSearchCtrl'
+            })
             .when('/category/:id/:page?', {
                 templateUrl: 'app/views/main.html',
                 controller: 'CategoryCtrl'

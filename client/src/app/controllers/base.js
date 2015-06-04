@@ -8,7 +8,7 @@
  * Controller of the webappApp
  */
 angular.module('webappApp')
-  .controller('BaseCtrl', function ($scope, AuthService, Session, $location, PRE_PAGE_COUNT, $timeout) {
+  .controller('BaseCtrl', function ($scope, AuthService, Session, $location, PRE_PAGE_COUNT, $timeout, UtilsService, $route) {
         $scope.prePageCount = PRE_PAGE_COUNT;
         $scope.currentUser = null;
         $scope.isAuthorized = AuthService.isAuthenticated();
@@ -76,4 +76,11 @@ angular.module('webappApp')
             }
             return category;
         };
+
+        $scope.search = function(){
+            UtilsService.rebound('search-key-down', function(){
+                $location.path('/search/' + $scope.keyword);
+                $route.reload();
+            }, 1000);
+        }
   });

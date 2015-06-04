@@ -93,9 +93,6 @@ class Article extends ArticleBase
         if(!$this->load($params) && $this->validate()){
             return $dataProvider;
         }
-//        if (!$this->validate()) {
-//            return $dataProvider;
-//        }
 
         $query->andFilterWhere(['cid' => $this->cid]);
         $query->andFilterWhere(['like', 'title', $this->title]);
