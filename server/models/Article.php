@@ -10,6 +10,7 @@ namespace app\models;
 
 use app\models\base\ArticleBase;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Html;
 
 class Article extends ArticleBase
 {
@@ -30,7 +31,7 @@ class Article extends ArticleBase
             'create_time',
             'last_modify',
             'summary' => function(){
-                return substr($this->content, 0 ,100);
+                return substr(Html::encode($this->content), 0 ,100);
             }
         ];
     }
