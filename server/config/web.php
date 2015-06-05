@@ -18,11 +18,11 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-            'loginUrl' => ['admin/default/sign-in']
+//            'loginUrl' => ['admin/default/sign-in']
         ],
-        'errorHandler' => [
-            'errorAction' => 'admin/default/error',
-        ],
+//        'errorHandler' => [
+//            'errorAction' => 'admin/default/error',
+//        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set

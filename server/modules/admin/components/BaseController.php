@@ -34,7 +34,7 @@ class BaseController extends Controller
                 ['label' => '用户', 'url' => ['user/index']],
                 ['label' => '分类', 'url' => ['category/index']],
                 ['label' => '文章', 'url' => ['article/index']],
-                ['label' => '退出 (' . $webUser->identity->name . ')','url'   => ['default/signout']],
+                ['label' => '退出 (' . $webUser->identity->name . ')','url'   => ['default/sign-out']],
             ];
         }
 
