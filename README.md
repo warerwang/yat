@@ -14,10 +14,10 @@
  * config 服务器配置
 
 ##安装
-开发环境需要一下组建 nodejs npm grunt-cli compass karma-cli ruby composer codecept
+开发环境需要一下组建 nodejs npm  gulp compass karma-cli ruby composer codecept
 安装命令
 ```shell
-npm -g install grunt-cli compass karma-cli ruby composer codecept
+npm -g install gulp compass karma-cli ruby composer codecept
 ```
 
 ###安装服务端
@@ -32,7 +32,7 @@ bower install
 ```shell
 cd yat/client
 make prepare
-grunt serve
+gulp serve
 ```
 
 ##部署
