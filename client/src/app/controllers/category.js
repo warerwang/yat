@@ -17,6 +17,7 @@ angular.module('webappApp')
 
         ArticleServ.query({cid:cid, page:page}, function(articles){
             $scope.articles = articles;
+            $rootScope.breadcrumbs.push({href: '#', name: $scope.getCategory(cid).name});
 
             $scope.itemCount = articles.length;
         });
