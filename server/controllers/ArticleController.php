@@ -97,7 +97,9 @@ class ArticleController extends RestController
         $article = new Article();
         $article->cid = \Yii::$app->request->get('cid');
         $article->title = \Yii::$app->request->get('keyword');
-        return $article->search();
+        $dataProvider = $article->search();
+        $dataProvider->setTotalCount(PHP_INT_MAX);
+        return $dataProvider;
     }
 
 

@@ -69,7 +69,9 @@ class CategoryController extends RestController
     public function actionIndex ()
     {
         $category= new Category();
-        return $category->search(\Yii::$app->request->get());
+        $dataProvider = $category->search();
+        $dataProvider->setTotalCount(PHP_INT_MAX);
+        return $dataProvider;
     }
 
     public function actionCreate ()
