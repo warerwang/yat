@@ -12,6 +12,7 @@ angular.module('webappApp')
         $scope.prePageCount = PRE_PAGE_COUNT;
         $scope.currentUser = null;
         $scope.isAuthorized = AuthService.isAuthenticated();
+		$scope.absUrl = $location.absUrl();
         $scope.alert = {
             isShow : false,
             type   : '',
