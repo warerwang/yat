@@ -12,12 +12,19 @@ angular.module('webappApp')
 		link    : function (scope, element) {
 			scope.$on('dataloaded', function () {
 				(function() {
-					var ds = document.createElement('script');
-					ds.type = 'text/javascript';ds.async = true;
-					ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-					ds.charset = 'UTF-8';
-					(document.getElementsByTagName('head')[0]
-					|| document.getElementsByTagName('body')[0]).appendChild(ds);
+					if($('#disqus-warphp-script').length > 0 ){
+						DISQUS.reset({
+							reload: true
+						});
+					}else{
+						var disqus_shortname = 'warphp',
+							disqus_identifier = 'article/' + scope.article.id,
+							disqus_title = scope.article.title,
+							dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+						dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+						dsq.id  = 'disqus-warphp-script';
+						(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+					}
 				})();
 			});
 		}
