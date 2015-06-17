@@ -13,6 +13,7 @@ angular.module('webappApp')
 			scope.$on('dataloaded', function () {
 				$timeout(function () {
 					$(element).find('code').each(function(i, block) {
+                        $(block).html($('<div/>').text($(block).html()).html());
 						hljs.highlightBlock(block);
 					});
 				}, 0, false);
