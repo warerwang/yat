@@ -25,9 +25,9 @@ angular.module('webappApp')
         };
 
         $scope.delete = function(){
-            UtilsService.confirm("确定要删除这篇文章么?", function(){
-                $scope.article.$delete({aid:id}, function(res){
-                    $location.path("/");
+            UtilsService.confirm('确定要删除这篇文章么?', function(){
+                $scope.article.$delete({aid:id}, function(){
+                    $location.path('/');
                 });
             });
 

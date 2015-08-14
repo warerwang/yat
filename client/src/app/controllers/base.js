@@ -16,7 +16,7 @@ angular.module('webappApp')
         $scope.alert = {
             isShow : false,
             type   : '',
-            message: ""
+            message: ''
         };
         $scope.showAlert = function(type, message, time){
             $scope.alert = {
@@ -34,7 +34,7 @@ angular.module('webappApp')
             }
         };
         if($scope.isAuthorized){
-            AuthService.loginByAccessToken(Session.access_token)
+            AuthService.loginByAccessToken(Session.accessToken)
                 .then(function (user) {
                     $scope.setCurrentUser(user);
                 });
@@ -83,5 +83,5 @@ angular.module('webappApp')
                 $location.path('/search/' + $scope.keyword);
                 $route.reload();
             }, 1000);
-        }
+        };
   });

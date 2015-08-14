@@ -16,18 +16,18 @@ angular.module('webappApp')
             return $http.post(API_BASE_URL + '/user', {email: email, password: password});
         };
 
-        authService.loginByAccessToken = function (access_token) {
-            return $http.get(API_BASE_URL + '/user/current?access-token=' + access_token).then(function (res) {
+        authService.loginByAccessToken = function (accessToken) {
+            return $http.get(API_BASE_URL + '/user/current?access-token=' + accessToken).then(function (res) {
                     return res.data;
                 });
         };
 
         authService.isAuthenticated = function () {
-            return !!Session.access_token;
+            return !!Session.accessToken;
         };
 
-        authService.saveAccessToken = function (access_token){
-            Session.create(access_token);
+        authService.saveAccessToken = function (accessToken){
+            Session.create(accessToken);
         };
 
         return authService;

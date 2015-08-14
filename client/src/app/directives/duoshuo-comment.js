@@ -1,6 +1,5 @@
 'use strict';
-/* global $ */
-/* global hljs */
+/* global DUOSHUO */
 
 /**
 * Created by yadongw on 15-5-29.

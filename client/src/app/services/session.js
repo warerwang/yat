@@ -5,14 +5,14 @@
 
 angular.module('webappApp')
 .service('Session', function ($cookieStore) {
-	this.access_token = $cookieStore.get('access_token');
+	this.accessToken = $cookieStore.get('access_token');
 
-	this.create = function (access_token) {
-		this.access_token = access_token;
-		$cookieStore.put('access_token', access_token);
+	this.create = function (accessToken) {
+		this.accessToken = accessToken;
+		$cookieStore.put('access_token', accessToken);
 	};
 	this.destroy = function () {
-		this.access_token = null;
+		this.accessToken = null;
 		$cookieStore.remove('access_token');
 	};
 	return this;
