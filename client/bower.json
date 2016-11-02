@@ -2,6 +2,7 @@
   "name": "webappApp",
   "version": "0.0.0",
   "dependencies": {
+    "bootstrap-sass": "~3.3.7",
     "angular-animate": "~1.3.4",
     "angular-cookies": "~1.3.4",
     "angular-touch": "~1.3.4",
@@ -21,6 +22,9 @@
     "angular": "~1.3.4"
   },
   "overrides": {
+    "bootstrap": {
+      "main": []
+    },
     "highlightjs": {
        "main": [
            "highlight.pack.js",
