@@ -25,8 +25,12 @@ npm -g install gulp compass karma-cli ruby composer codecept
 cd yat/server
 make composer_prepare
 make composer_install
+mysql -uroot -p
+create database yat character set utf8;
 make prepare
 bower install
+cp -f ../config/* /etc/nginx/conf.d/
+nginx -s reload
 ```
 ###客户端
 ```shell

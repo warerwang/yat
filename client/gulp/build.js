@@ -67,10 +67,12 @@ module.exports = function(options) {
   // Only applies for fonts from bower dependencies
   // Custom fonts are handled by the "other" task
   gulp.task('fonts', function () {
-    return gulp.src($.mainBowerFiles())
-      .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
-      .pipe($.flatten())
+    return gulp.src(['bower_components/font-awesome/fonts/*'])
       .pipe(gulp.dest(options.dist + '/fonts/'));
+  });
+  gulp.task('fonts2', function () {
+    return gulp.src(['bower_components/font-awesome/fonts/*'])
+      .pipe(gulp.dest(options.tmp + '/serve/fonts/'));
   });
 
   gulp.task('other', function () {
@@ -81,9 +83,21 @@ module.exports = function(options) {
       .pipe(gulp.dest(options.dist + '/'));
   });
 
-  gulp.task('clean', function (done) {
-    $.del([options.dist + '/', options.tmp + '/'], done);
+  gulp.task('clean', function () {
+    //$.del([options.dist + '/', options.tmp + '/'], done);
+    $.del([options.dist + '/**/*']);
   });
 
-  gulp.task('build', ['html', 'fonts', 'other']);
+  gulp.task('replace-url', function(){
+    return gulp.src(options.src+'/app/index.js')
+      .pipe($.replace(options.devUrl, options.prodUrl))
+      .pipe(gulp.dest(options.src+'/app'));
+  });
+
+  gulp.task('build', ['replace-url', 'html', 'fonts', 'other'], function(){
+
+    return gulp.src(options.src+'/app/index.js')
+      .pipe($.replace(options.prodUrl, options.devUrl))
+      .pipe(gulp.dest(options.src+'/app'));
+  });
 };
