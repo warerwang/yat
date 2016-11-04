@@ -94,8 +94,13 @@ module.exports = function(options) {
       .pipe(gulp.dest(options.src+'/app'));
   });
 
-  gulp.task('build', ['replace-url', 'html', 'fonts', 'other'], function(){
+  gulp.task('build', ['html', 'fonts', 'other'], function(){
+    return gulp.src(options.src+'/app/index.js')
+      .pipe($.replace(options.prodUrl, options.devUrl))
+      .pipe(gulp.dest(options.src+'/app'));
+  });
 
+  gulp.task('build-prod', ['replace-url', 'html', 'fonts', 'other'], function(){
     return gulp.src(options.src+'/app/index.js')
       .pipe($.replace(options.prodUrl, options.devUrl))
       .pipe(gulp.dest(options.src+'/app'));

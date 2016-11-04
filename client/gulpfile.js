@@ -9,7 +9,7 @@ var options = {
   dist: 'dist',
   tmp: '.tmp',
   e2e: 'e2e',
-  devUrl: 'http://api.warphp.com:888',
+  devUrl: 'http://api.docker.warphp.com:888',
   prodUrl: 'http://api.warphp.com',
   errorHandler: function(title) {
     return function(err) {

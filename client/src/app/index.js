@@ -44,5 +44,5 @@ angular
             });
         $locationProvider.html5Mode(true);
     })
-    .constant('API_BASE_URL', 'http://api.warphp.com:888')
+    .constant('API_BASE_URL', 'http://api.docker.warphp.com:888')
     .constant('PRE_PAGE_COUNT', 10);
