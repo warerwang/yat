@@ -13,8 +13,8 @@ angular.module('webappApp')
 		$scope.submit = function () {
 			AuthService.login($scope.email, $scope.password)
 				.then(function (res) {
-                    AuthService.saveAccessToken(res.data.access_token);
-                    AuthService.loginByAccessToken(res.data.access_token)
+                    AuthService.saveAccessToken(res.data.accessToken);
+                    AuthService.loginByAccessToken(res.data.accessToken)
                         .then(function(user){
                             $scope.setCurrentUser(user);
                         });

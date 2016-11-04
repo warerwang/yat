@@ -2,7 +2,7 @@
 /**
  * Created by yadongw on 15-5-6.
  */
-
+/*global $: false */
 angular.module('webappApp')
     .factory('UtilsService', function () {
         var timer = {};
@@ -15,9 +15,9 @@ angular.module('webappApp')
                         localTimeStamp = UTCDate.getTime() - offset * 60 * 1000,
                         localDate = new Date(localTimeStamp),
                         localTime = '';
-                    if(format == this.DATE_FORMAT_MMDDYYY){
+                    if(format === this.DATE_FORMAT_MMDDYYY){
                         localTime = localDate.toString().split(' ').slice(1,4);
-                        localTime = localTime[0] + " " + localTime[1] + ", " + localTime[2];
+                        localTime = localTime[0] + ' ' + localTime[1] + ', ' + localTime[2];
                     }else{
                         var year = localDate.getFullYear(),
                             month = localDate.getMonth() + 1,
@@ -25,17 +25,27 @@ angular.module('webappApp')
                             hour = localDate.getHours(),
                             minute = localDate.getMinutes(),
                             second = localDate.getSeconds();
-                        if( month < 10 ) month = '0' + month;
-                        if( date < 10 ) date = '0' + date;
-                        if( hour < 10 ) hour = '0' + hour;
-                        if( minute < 10 ) minute = '0' + minute;
-                        if( second < 10 ) second = '0' + second;
+                        if( month < 10 ){
+                            month = '0' + month;
+                        }
+                        if( date < 10 ){
+                            date = '0' + date;
+                        }
+                        if( hour < 10 ){
+                            hour = '0' + hour;
+                        }
+                        if( minute < 10 ){
+                            minute = '0' + minute;
+                        }
+                        if( second < 10 ){
+                            second = '0' + second;
+                        }
 
-                        localTime += year + "-";
-                        localTime += month + "-";
-                        localTime += date + " ";
-                        localTime += hour + ":";
-                        localTime += minute + ":";
+                        localTime += year + '-';
+                        localTime += month + '-';
+                        localTime += date + ' ';
+                        localTime += hour + ':';
+                        localTime += minute + ':';
                         localTime += second;
                     }
 
@@ -86,23 +96,27 @@ angular.module('webappApp')
             getJsDate : function(date)
             {
                 var dateTime = date.split(' ');
-                if(dateTime.length != 2) return '';
+                if(dateTime.length !== 2){
+                    return '';
+                }
                 var dates = dateTime[0].split('-');
                 var times = dateTime[1].split(':');
-                if(dates.length != 3 || times.length != 3) return '';
+                if(dates.length !== 3 || times.length !== 3){
+                    return '';
+                }
 
                 return new Date(dates[0],dates[1] - 1,dates[2],times[0],times[1],times[2]);
             },
 
             confirm : function(content, callback)
             {
-                $("#yat-confirm .modal-body .modal-body-content").html(content);
-                $("#yat-confirm").modal('show');
+                $('#yat-confirm .modal-body .modal-body-content').html(content);
+                $('#yat-confirm').modal('show');
                 function callbackOverride(){
-                    $("#yat-confirm").modal('hide');
+                    $('#yat-confirm').modal('hide');
                     callback();
-                };
-                $("#yat-confirm .btn-primary").unbind('click').click(callbackOverride);
+                }
+                $('#yat-confirm .btn-primary').unbind('click').click(callbackOverride);
             },
 
             htmlEncode : function(str)
@@ -117,7 +131,7 @@ angular.module('webappApp')
             getFileExt : function(filename)
             {
                 var index = filename.lastIndexOf('.');
-                if(index == -1){
+                if(index === -1){
                     return '';
                 }else{
                     return filename.substring(index + 1).toLowerCase();
@@ -129,7 +143,7 @@ angular.module('webappApp')
                     clearTimeout(timer[key]);
                 }
                 timer[key] = setTimeout(function(){
-                    callback()
+                    callback();
                 } , time);
             }
         };

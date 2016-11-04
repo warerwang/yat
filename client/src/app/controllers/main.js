@@ -20,23 +20,23 @@ angular.module('webappApp')
     });
 
     $scope.previousPage = function(){
-        $location.path("/" + (--page));
+        $location.path('/' + (--page));
     };
 
     $scope.nextPage = function(){
-        $location.path("/" + (++page));
+        $location.path('/' + (++page));
     };
 
     $scope.delete = function(index){
-        UtilsService.confirm("确定要删除这篇文章么?", function(){
+        UtilsService.confirm('确定要删除这篇文章么?', function(){
             var article = $scope.articles[index];
-            article.$delete({aid:article.id}, function(res){
+            article.$delete({aid:article.id}, function(){
                 $scope.articles.splice(index, 1);
-                $scope.showAlert('success', "删除文章成功.", 5000);
+                $scope.showAlert('success', '删除文章成功.', 5000);
             });
         });
     };
     $scope.disableNextBtn = function() {
-        return $scope.itemCount != $scope.prePageCount;
+        return $scope.itemCount !== $scope.prePageCount;
     };
   });
