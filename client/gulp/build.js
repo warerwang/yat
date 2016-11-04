@@ -95,14 +95,6 @@ module.exports = function(options) {
   });
 
   gulp.task('build', ['html', 'fonts', 'other'], function(){
-    return gulp.src(options.src+'/app/index.js')
-      .pipe($.replace(options.prodUrl, options.devUrl))
-      .pipe(gulp.dest(options.src+'/app'));
-  });
-
-  gulp.task('build-prod', ['replace-url', 'html', 'fonts', 'other'], function(){
-    return gulp.src(options.src+'/app/index.js')
-      .pipe($.replace(options.prodUrl, options.devUrl))
-      .pipe(gulp.dest(options.src+'/app'));
+    console.log('Build Success!!');
   });
 };
