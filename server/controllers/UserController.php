@@ -22,15 +22,15 @@ use yii\web\Response;
  * @SWG\Property(name="email",type="string"),
  * @SWG\Property(name="group_id",type="string"),
  * @SWG\Property(name="nickname",type="string"),
- * @SWG\Property(name="access_token",type="string"),
- * @SWG\Property(name="create_time",type="string"),
- * @SWG\Property(name="last_activity",type="string"),
+ * @SWG\Property(name="accessToken",type="string"),
+ * @SWG\Property(name="createTime",type="string"),
+ * @SWG\Property(name="lastActivity",type="string"),
  * )
  * @SWG\Model(id="AccessToken", description="登陆凭证")(
  * @SWG\Property(name="id",type="string"),
  * @SWG\Property(name="nickname",type="string"),
- * @SWG\Property(name="access_token",type="string"),
- * @SWG\Property(name="expire_time",type="string"),
+ * @SWG\Property(name="accessToken",type="string"),
+ * @SWG\Property(name="expireTime",type="string"),
  * )
 
  */
@@ -201,8 +201,8 @@ class UserController extends RestController
         return [
 	        'id'           => $user->id,
 	        'nickname'     => $user->nickname,
-	        'access_token' => $user->access_token,
-            'expire_time'  => date('Y-m-d H:i:s', time() + User::EXPIRE_TIME)
+	        'accessToken' => $user->access_token,
+            'expireTime'  => date('Y-m-d H:i:s', time() + User::EXPIRE_TIME)
         ];
     }
 

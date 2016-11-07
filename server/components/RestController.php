@@ -8,6 +8,7 @@
 
 namespace app\components;
 
+use app\models\User;
 use yii\filters\Cors;
 use yii\rest\Controller;
 use yii\filters\auth\CompositeAuth;
@@ -51,5 +52,16 @@ class RestController extends Controller
     public function actionOptions ()
     {
         return ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'];
+    }
+
+    public function checkAdminAccess ()
+    {
+        if(\Yii::$app->user->isGuest){
+            return false;
+        }
+        if(\Yii::$app->user->identity->group_id != User::GROUP_ADMIN){
+            return false;
+        }
+        return true;
     }
 } 

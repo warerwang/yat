@@ -27,11 +27,16 @@ class User extends UsersBase implements \yii\web\IdentityInterface
         return [
             'id',
             'email',
-            'group_id',
+            'groupId' => 'group_id',
             'nickname',
-//            'access_token',
-            'create_time',
-            'last_activity'
+            'accessToken' => function(){
+                if(\Yii::$app->user->isGuest || \Yii::$app->user->id != $this->id){
+                    return null;
+                }
+                return $this->access_token;
+            },
+            'createTime' => 'create_time',
+            'lastActivity' => 'last_activity'
         ];
     }
 
@@ -131,6 +136,7 @@ class User extends UsersBase implements \yii\web\IdentityInterface
         $user->nickname = $nickname;
         $user->access_token = md5(microtime(true));
         if ($user->save()) {
+            \Yii::$app->user->login($user);
             return $user;
         } else {
             throw new UserException("注册用户失败,错误信息: " . Tools::getFirstError($user));

@@ -139,13 +139,13 @@
                 "nickname": {
                     "type": "string"
                 },
-                "access_token": {
+                "accessToken": {
                     "type": "string"
                 },
-                "create_time": {
+                "createTime": {
                     "type": "string"
                 },
-                "last_activity": {
+                "lastActivity": {
                     "type": "string"
                 }
             }
