@@ -13,6 +13,7 @@ use app\components\Tools;
 use app\models\Article;
 use app\models\Category;
 use yii\base\UserException;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -110,6 +111,9 @@ class ArticleController extends RestController
     public function actionCreate ()
     {
         $model = new Article();
+        if(!$this->checkAdminAccess()){
+            throw new ForbiddenHttpException();
+        }
         $data = json_decode(\Yii::$app->request->rawBody, true);
         $model->load([$model->formName() => $data]);
         if(!$model->save()){
@@ -185,6 +189,9 @@ class ArticleController extends RestController
 
     public function actionUpdate ($id)
     {
+        if(!$this->checkAdminAccess()){
+            throw new ForbiddenHttpException();
+        }
         \Yii::$app->request->setQueryParams(['expand' => 'content,category']);
         $model = Article::findOne($id);
         $this->checkModel($model);
@@ -203,6 +210,9 @@ class ArticleController extends RestController
 
     public function actionDelete ($id)
     {
+        if(!$this->checkAdminAccess()){
+            throw new ForbiddenHttpException();
+        }
         $model = Article::findOne($id);
         $this->checkModel($model);
         if($model->delete()){

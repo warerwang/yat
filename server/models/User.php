@@ -9,6 +9,12 @@ use yii\base\ModelEvent;
 use yii\db\BaseActiveRecord;
 use yii\db\Exception;
 
+/**
+ * Class User
+ *
+ * @method static findOne($id)
+ * @package app\models
+ */
 class User extends UsersBase implements \yii\web\IdentityInterface
 {
     const GROUP_ADMIN = 1;

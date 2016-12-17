@@ -64,11 +64,19 @@ $config = [
             'on beforeSend' => function ($event) {
                 /** @var yii\web\Response $response */
                 $response = $event->sender;
-                if(!$response->isSuccessful && is_array($response->data) && isset($response->data['type'])){
-                     unset($response->data['type']);
+                if(!$response->isSuccessful && is_array($response->data)){
+                    $cors = new \yii\filters\Cors();
+                    $requestCorsHeaders = $cors->extractHeaders();
+                    $responseCorsHeaders = $cors->prepareHeaders($requestCorsHeaders);
+                    $cors->addCorsHeaders($response, $responseCorsHeaders);
+                    if(isset($response->data['type'])) unset($response->data['type']);
                 }
             },
         ],
+        'assetManager' => [
+            'linkAssets' => true,
+            'appendTimestamp'   => true,
+        ]
 
     ],
     'params' => $params,

@@ -238,6 +238,11 @@ class UserController extends RestController
 
     }
 
+    /**
+     * @param $idOrEmail
+     *
+     * @return null|static
+     */
     private function findModel ($idOrEmail)
     {
         if (strpos($idOrEmail, '@') === false) {

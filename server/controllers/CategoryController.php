@@ -12,6 +12,7 @@ use app\components\RestController;
 use app\components\Tools;
 use app\exceptions\UserException;
 use app\models\Category;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -149,6 +150,9 @@ class CategoryController extends RestController
 
     public function actionUpdate ($id)
     {
+        if(!$this->checkAdminAccess()){
+            throw new ForbiddenHttpException();
+        }
         $model = $this->findModel($id);
         $data = json_decode(\Yii::$app->request->rawBody, true);
         $model->load([$model->formName() => $data]);
@@ -165,6 +169,9 @@ class CategoryController extends RestController
 
     public function actionDelete ($id)
     {
+        if(!$this->checkAdminAccess()){
+            throw new ForbiddenHttpException();
+        }
         $model = $this->findModel($id);
         if($model->delete()){
             return true;

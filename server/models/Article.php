@@ -31,7 +31,9 @@ class Article extends ArticleBase
             'create_time',
             'last_modify',
             'summary' => function(){
-                return substr(Html::encode($this->content), 0 ,100);
+                return mb_substr(strtr(
+                    strip_tags($this->content), ['&nbsp;' => '']
+                ), 0 , 200);
             }
         ];
     }
