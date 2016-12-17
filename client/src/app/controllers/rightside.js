@@ -12,7 +12,7 @@ angular.module('webappApp')
         $scope.isActive = function(url){
             return url === $location.$$url;
         };
-        CategoryServ.query(function(categories){
+        CategoryServ.query({}, function(categories){
             $scope.categories = categories;
             $scope.setCategories(categories);
         });
