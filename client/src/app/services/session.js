@@ -27,7 +27,7 @@ angular.module('webappApp')
 		return resource;
 	};
 	this.wrapActions = function(resource, actions) {
-		if(!actions) actions = ['get', 'delete', 'query', 'update', 'save'];
+		if(!actions) {actions = ['get', 'delete', 'query', 'update', 'save'];}
 		var action, i, len, wrappedResource;
 		wrappedResource = resource;
 		for (i = 0, len = actions.length; i < len; i++) {

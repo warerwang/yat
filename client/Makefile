@@ -6,7 +6,7 @@ deploy:
 	scp -P 12520 client_upload.tar.gz yadongw@blog.warphp.com:/webapp/yat/client
 	rm client_upload.tar.gz
 	git checkout src/app/index.js
-	ssh -P 12520 yadongw@blog.warphp.com
+	ssh -p 12520 yadongw@blog.warphp.com
 prepare:
 	npm install
 	bower install
